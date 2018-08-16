@@ -6,13 +6,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from "reactstrap";
-
+import { Link } from "react-router-dom";
+import "./NavigationBar.css";
 class NavigationBar extends Component {
   state = {
     isOpen: false
@@ -25,8 +22,10 @@ class NavigationBar extends Component {
   render() {
     return (
       <div>
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">movie junkie</NavbarBrand>
+        <Navbar className="bg-dark" dark expand="md">
+          <NavbarBrand tag={Link} to="/">
+            MovieJunkie
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggleHandler} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

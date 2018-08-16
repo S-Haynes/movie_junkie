@@ -8,5 +8,6 @@
     "start": "node server.js"
   },
   "author": "S-Haynes",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }

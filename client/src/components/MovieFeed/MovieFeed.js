@@ -1,6 +1,6 @@
 import React from "react";
 import MovieItem from "./MovieItem/MovieItem";
-import { Row } from "reactstrap";
+import { Row, Container } from "reactstrap";
 
 const MovieFeed = props => {
   const { movies } = props;

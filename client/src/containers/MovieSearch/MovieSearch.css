@@ -1,0 +1,27 @@
+.MyTypist {
+  font-size: 60px;
+  font-family: Questrial, sans-serif;
+}
+
+.MyTypist .Typist1 {
+  color: rgb(181, 252, 247);
+}
+.MyTypist .Typist2 {
+  color: rgb(225, 176, 244);
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 2000ms ease-out;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+.fade-leave-active {
+  opacity: 0;
+  transition: opacity 2000ms ease-out;
+}

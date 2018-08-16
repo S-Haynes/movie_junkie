@@ -1,0 +1,16 @@
+.title-page .btn:hover,
+.title-page .btn:active,
+.title-page .btn.active,
+.title-page .btn:focus,
+.title-page .btn.active:focus,
+.title-page .btn:active:focus,
+.title-page .btn.active.focus {
+  background: rgba(61, 110, 247, 0.1) !important;
+  box-shadow: none;
+}
+
+@media (min-width: 0px) {
+  .title-page .container {
+    max-width: 100% !important;
+  }
+}
