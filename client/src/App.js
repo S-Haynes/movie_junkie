@@ -11,6 +11,33 @@ import Register from "./containers/Auth/Register/Register";
 import Login from "./containers/Auth/Login/Login";
 import Home from "./components/Home/Home";
 
+import setAuthToken from "./utility/setAuthToken";
+import { setCurrentUser, logoutUser } from "./store/actions/auth";
+import jwt_decode from "jwt-decode";
+
+// Check if token is in local storage
+if (localStorage.jwtToken) {
+  const token = localStorage.jwtToken;
+
+  // Set auth header
+  setAuthToken(token);
+
+  // Set user state
+  const decodedUser = jwt_decode(token);
+  store.dispatch(setCurrentUser(decodedUser, true));
+
+  // Check if token expired
+  const currentTime = Date.now() / 1000;
+
+  if (decodedUser.exp < currentTime) {
+    // log the user out
+    store.dispatch(logoutUser());
+
+    //relocate the user
+    window.location.href = "/login";
+  }
+}
+
 class App extends Component {
   render() {
     return (

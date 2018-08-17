@@ -18,21 +18,37 @@ export const loginUser = (userData, history) => dispatch => {
     .then(res => {
       const { token } = res.data;
 
-      // Set the auth token header
+      // Set the auth token header & Local Storage
       setAuthToken(token);
+      localStorage.setItem("jwtToken", token);
 
       // Decode the token to the user info
       const decodedUser = jwt_decode(token);
 
       // Send the current user to the state
-      dispatch(setCurrentUser(decodedUser));
+      dispatch(setCurrentUser(decodedUser, true));
     })
     .catch(err => console.log(err.response.data));
 };
 
-export const setCurrentUser = userData => {
+// Logout the user and remove token
+export const logoutUser = () => dispatch => {
+  // Remove user from state
+  dispatch(setCurrentUser({}, false));
+
+  // Remove auth header
+  setAuthToken(false);
+
+  // Remove from local storage
+  localStorage.removeItem("jwtToken");
+
+  //TODO clear current profile
+};
+
+export const setCurrentUser = (userData, auth) => {
   return {
     type: SET_CURRENT_USER,
-    payload: userData
+    payload: userData,
+    auth: auth
   };
 };
