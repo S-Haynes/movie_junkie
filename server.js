@@ -14,6 +14,9 @@ app.use(bodyParser.json());
 // Passport middleware
 app.use(passport.initialize());
 
+//Passport Config
+require("./config/passport");
+
 // connect to db
 mongoose
   .connect(
