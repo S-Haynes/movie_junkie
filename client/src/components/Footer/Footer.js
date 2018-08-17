@@ -23,7 +23,7 @@ const Footer = props => {
           <Logo width="70px" />
         </Col>
         <Col style={{ textAlign: "center", color: "white" }} sm="12">
-          <p> Built with React. All Rights Reserved &copy; </p>
+          <p> Powered by React. All Rights Reserved &copy; </p>
         </Col>
       </Row>
     </div>

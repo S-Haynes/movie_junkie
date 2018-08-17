@@ -43,7 +43,7 @@ class MovieSearch extends Component {
 
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value }, e => {
-      if (this.state.moviesearch && this.state.moviesearch.length > 0) {
+      if (this.state.moviesearch && this.state.moviesearch.length > 1) {
         this.getData(this.state.moviesearch);
       }
     });
@@ -87,13 +87,14 @@ class MovieSearch extends Component {
 
           {movieContent}
 
-          {searched && moviesearch.length > 1 && mounted ? null : (
+          {searched || (moviesearch.length > 1 && mounted) ? null : (
             <Typist
               className="MyTypist"
               cursor={{ blink: true, fontSize: "60px" }}
+              key="typetype"
             >
               <span className="Typist1">What's the hold up?</span>
-              <Typist.Backspace count={19} delay={500} />
+              <Typist.Backspace count={19} delay={1000} />
               <span className="Typist2">Search for your favorite movie...</span>
             </Typist>
           )}
