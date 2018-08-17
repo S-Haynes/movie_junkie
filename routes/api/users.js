@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const User = require("../../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
+
+// require models
+const User = require("../../models/user");
+const Profile = require("../../models/profile");
 
 router.get("/", (req, res) => {
   res.send("User routing works");
@@ -23,18 +26,33 @@ router.post("/register", (req, res) => {
       errors.username = "Username already taken";
       return res.status(400).json(errors);
     } else {
+      //create the new user
       const newUser = new User({
         username: username,
         password: password
       });
 
+      // hash the new user password
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
+          //save the new user
           newUser
             .save()
-            .then(user => res.json(user))
+            .then(user => {
+              //create the new user profile
+              const newProfile = new Profile({
+                user: user._id
+              });
+
+              newProfile
+                .save()
+                .then(profile => {
+                  return res.status(200).json({ user, profile });
+                })
+                .catch(err => console.log(err));
+            })
             .catch(err => console.log(err));
         });
       });
