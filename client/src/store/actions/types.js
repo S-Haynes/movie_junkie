@@ -8,4 +8,3 @@ export const PROFILE_LOADING = "PROFILE_LOADING";
 
 export const REGISTER_USER = "REGISTER_USER";
 export const SET_CURRENT_USER = "GET_USER";
-export const SET_AUTH = "SET_AUTH";

@@ -12,6 +12,7 @@ import "./Movie.css";
 import Link from "../../../node_modules/react-router-dom/Link";
 import { connect } from "react-redux";
 import { getMovie } from "../../store/actions/movie";
+import setAuthToken from "../../utility/setAuthToken";
 
 class Movie extends Component {
   state = {
@@ -19,7 +20,14 @@ class Movie extends Component {
   };
 
   componentDidMount() {
+    setAuthToken(false);
     this.props.getMovie(this.props.match.params.id);
+  }
+
+  componentWillUnmount() {
+    if (localStorage.jwtToken) {
+      setAuthToken(localStorage.jwtToken);
+    }
   }
 
   componentWillReceiveProps(nextProps) {

@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from "./types";
+import { SET_CURRENT_USER, SET_TOKEN } from "./types";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../../utility/setAuthToken";
@@ -18,10 +18,9 @@ export const loginUser = (userData, history) => dispatch => {
     .then(res => {
       const { token } = res.data;
 
-      // Set the auth token header & Local Storage
+      // Set the auth token header, Local Storage & state
       setAuthToken(token);
       localStorage.setItem("jwtToken", token);
-
       // Decode the token to the user info
       const decodedUser = jwt_decode(token);
 

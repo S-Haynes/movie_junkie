@@ -6,6 +6,7 @@ import MovieFeed from "../../components/MovieFeed/MovieFeed";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
 import "./MovieSearch.css";
+import setAuthToken from "../../utility/setAuthToken";
 
 class MovieSearch extends Component {
   state = {
@@ -16,11 +17,15 @@ class MovieSearch extends Component {
   };
 
   componentDidMount() {
+    setAuthToken(false);
     this.setState({ mounted: true });
   }
 
   componentWillUnmount() {
     this.setState({ mounted: false });
+    if (localStorage.jwtToken) {
+      setAuthToken(localStorage.jwtToken);
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.movie.movies) {

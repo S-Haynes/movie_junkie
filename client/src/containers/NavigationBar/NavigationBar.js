@@ -48,6 +48,11 @@ class NavigationBar extends Component {
     const authLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
+          <NavLink tag={Link} to="/dashboard">
+            Dashboard
+          </NavLink>
+        </NavItem>
+        <NavItem>
           <NavLink href="" onClick={e => this.logoutHandler(e)}>
             Logout
           </NavLink>
