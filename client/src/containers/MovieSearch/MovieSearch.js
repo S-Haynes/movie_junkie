@@ -1,14 +1,7 @@
 import React, { Component } from "react";
-import {
-  Jumbotron,
-  Button,
-  Container,
-  Col,
-  Input,
-  Form,
-  FormGroup
-} from "reactstrap";
-import axios from "axios";
+import { connect } from "react-redux";
+import { getMovies } from "../../store/actions/movie";
+import { Jumbotron, Container, Col, Input, Form, FormGroup } from "reactstrap";
 import MovieFeed from "../../components/MovieFeed/MovieFeed";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
@@ -20,33 +13,29 @@ class MovieSearch extends Component {
     movies: [],
     searched: false
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.movie.movies) {
+      this.setState({ movies: nextProps.movie.movies });
+    }
 
+    if (nextProps.movie.searched) {
+      this.setState({ searched: nextProps.movie.searched });
+    }
+  }
   onSubmitHandler = e => {
     e.preventDefault();
     console.log(this.state.moviesearch);
-    this.getData();
+    this.getData(this.state.moviesearch);
   };
 
-  getData = () => {
-    axios
-      .get(
-        "http://www.omdbapi.com/?s=" +
-          this.state.moviesearch +
-          "&apikey=108b0f56"
-      )
-      .then(res => {
-        this.setState({
-          movies: res.data.Search,
-          searched: true
-        });
-      })
-      .catch(err => console.log(err));
+  getData = searchTerm => {
+    this.props.getMovies(searchTerm);
   };
 
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value }, e => {
-      if (this.state.moviesearch && this.state.moviesearch.length > 1) {
-        this.getData();
+      if (this.state.moviesearch && this.state.moviesearch.length > 0) {
+        this.getData(this.state.moviesearch);
       }
     });
   };
@@ -62,6 +51,7 @@ class MovieSearch extends Component {
     } else {
       movieContent = <p>Nothing found yet, keep searching...</p>;
     }
+
     return (
       <div>
         <Container style={{ marginTop: "50px" }}>
@@ -105,5 +95,11 @@ class MovieSearch extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  movie: state.movie
+});
 
-export default MovieSearch;
+export default connect(
+  mapStateToProps,
+  { getMovies }
+)(MovieSearch);

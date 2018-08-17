@@ -28,18 +28,7 @@ iframe {
   width: 100%;
 }
 
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  opacity: 1;
-  transition: opacity 2000ms ease-out;
-}
-
-.fade-leave {
-  opacity: 1;
-}
-.fade-leave-active {
-  opacity: 0;
-  transition: opacity 2000ms ease-out;
+.title-page .btn-outline-primary {
+  color: #c451fa !important;
+  border-color: #c451fa !important;
 }

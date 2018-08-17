@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col } from "reactstrap";
 import Logo from "../Logo/Logo";
 
 const Footer = props => {
@@ -9,15 +9,21 @@ const Footer = props => {
         width: "100%",
         height: "160px",
         background: "#070707",
-        padding: "20px",
+        paddingTop: "20px",
         position: "absolute",
         bottom: "-200px",
-        zIndex: "10"
+        zIndex: "10",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
       }}
     >
       <Row>
-        <Col style={{ textAlign: "center" }} sm="12">
-          <Logo width="100px" />
+        <Col style={{ textAlign: "center", marginBottom: "10px" }} sm="12">
+          <Logo width="70px" />
+        </Col>
+        <Col style={{ textAlign: "center", color: "white" }} sm="12">
+          <p> Built with React. All Rights Reserved &copy; </p>
         </Col>
       </Row>
     </div>

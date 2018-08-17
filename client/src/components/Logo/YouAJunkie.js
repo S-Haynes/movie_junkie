@@ -1,7 +1,7 @@
 import React from "react";
 import JunkieLogo from "../../assets/img/title-junkie.png";
 import JunkieGif from "../../assets/img/junkie.gif";
-import { Container, Button } from "reactstrap";
+import { Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./YouAJunkie.css";
 

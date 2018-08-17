@@ -22,7 +22,12 @@ class NavigationBar extends Component {
   render() {
     return (
       <div>
-        <Navbar className="bg-dark" dark expand="md">
+        <Navbar
+          style={{ position: "relative", zIndex: "10000" }}
+          className="bg-dark"
+          dark
+          expand="md"
+        >
           <NavbarBrand tag={Link} to="/">
             MovieJunkie
           </NavbarBrand>

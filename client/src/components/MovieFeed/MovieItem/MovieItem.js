@@ -4,12 +4,11 @@ import {
   Col,
   Card,
   CardImg,
-  CardText,
   CardBody,
   CardTitle,
   CardSubtitle
 } from "reactstrap";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import ImageNotFound from "../../../assets/img/image-not-found.png";
 
 class MovieItem extends Component {

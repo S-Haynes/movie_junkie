@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import {
   Container,
   Col,
@@ -10,6 +9,9 @@ import {
   ListGroupItem
 } from "reactstrap";
 import "./Movie.css";
+import Link from "../../../node_modules/react-router-dom/Link";
+import { connect } from "react-redux";
+import { getMovie } from "../../store/actions/movie";
 
 class Movie extends Component {
   state = {
@@ -17,23 +19,25 @@ class Movie extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get(
-        "http://www.omdbapi.com/?i=" +
-          this.props.match.params.id +
-          "&apikey=108b0f56"
-      )
-      .then(res => {
-        this.setState({ movie: res.data });
-        console.log(this.state.movie);
-      })
-      .catch(err => console.log(err));
+    this.props.getMovie(this.props.match.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.movie.movie) {
+      this.setState({ movie: nextProps.movie.movie });
+    }
   }
 
   render() {
     const { movie } = this.state;
     return (
       <div style={{ marginTop: "50px" }}>
+        <Container style={{ padding: "0", marginBottom: "10px" }}>
+          <Link to="/search" className="btn btn-outline-dark btn-lg">
+            {" "}
+            Back to Search
+          </Link>
+        </Container>
         <Container
           style={{ color: "white", background: "#111", padding: "50px" }}
         >
@@ -123,4 +127,11 @@ class Movie extends Component {
   }
 }
 
-export default Movie;
+const mapStateToProps = state => ({
+  movie: state.movie
+});
+
+export default connect(
+  mapStateToProps,
+  { getMovie }
+)(Movie);
