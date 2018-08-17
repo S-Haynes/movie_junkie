@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Collapse,
   Navbar,
@@ -10,6 +11,9 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./NavigationBar.css";
+
+import { logoutUser } from "../../store/actions/auth";
+
 class NavigationBar extends Component {
   state = {
     isOpen: false
@@ -19,7 +23,38 @@ class NavigationBar extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
+  logoutHandler = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
+
   render() {
+    const { isAuthenticated } = this.props.auth;
+    const guestLinks = (
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink tag={Link} to="/login">
+            Login
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to="/register">
+            Register
+          </NavLink>
+        </NavItem>
+      </Nav>
+    );
+
+    const authLinks = (
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink href="" onClick={e => this.logoutHandler(e)}>
+            Logout
+          </NavLink>
+        </NavItem>
+      </Nav>
+    );
+
     return (
       <div>
         <Navbar
@@ -32,24 +67,19 @@ class NavigationBar extends Component {
             MovieJunkie
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleHandler} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink tag={Link} to="/login">
-                  Login
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/register">
-                  Register
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
+          <Collapse isOpen={this.state.isOpen} navbar />
+          {isAuthenticated ? authLinks : guestLinks}
         </Navbar>
       </div>
     );
   }
 }
 
-export default NavigationBar;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(NavigationBar);

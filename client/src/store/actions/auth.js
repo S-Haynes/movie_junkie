@@ -27,6 +27,9 @@ export const loginUser = (userData, history) => dispatch => {
 
       // Send the current user to the state
       dispatch(setCurrentUser(decodedUser, true));
+
+      //send user to their dashboard
+      history.push("/dashboard");
     })
     .catch(err => console.log(err.response.data));
 };

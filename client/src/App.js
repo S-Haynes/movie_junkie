@@ -10,6 +10,7 @@ import Movie from "./containers/Movie/Movie";
 import Register from "./containers/Auth/Register/Register";
 import Login from "./containers/Auth/Login/Login";
 import Home from "./components/Home/Home";
+import Profile from "./containers/Profile/Profile";
 
 import setAuthToken from "./utility/setAuthToken";
 import { setCurrentUser, logoutUser } from "./store/actions/auth";
@@ -51,6 +52,7 @@ class App extends Component {
                 <Route exact path="/movie/:id" component={Movie} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/dashboard" component={Profile} />
               </Switch>
             </div>
           </Layout>
