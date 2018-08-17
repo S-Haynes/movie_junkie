@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Container,
   FormGroup,
@@ -9,6 +10,7 @@ import {
   Button
 } from "reactstrap";
 import "./Login.css";
+import { loginUser } from "../../../store/actions/auth";
 
 class Login extends Component {
   state = {
@@ -30,8 +32,9 @@ class Login extends Component {
       password: password
     };
 
-    console.log(userData);
+    this.props.loginUser(userData, this.props.history);
   };
+
   render() {
     const { username, password } = this.state;
     return (
@@ -73,4 +76,7 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(
+  null,
+  { loginUser }
+)(Login);
