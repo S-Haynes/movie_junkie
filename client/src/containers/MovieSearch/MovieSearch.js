@@ -11,8 +11,17 @@ class MovieSearch extends Component {
   state = {
     moviesearch: "",
     movies: [],
-    searched: false
+    searched: false,
+    mounted: false
   };
+
+  componentDidMount() {
+    this.setState({ mounted: true });
+  }
+
+  componentWillUnmount() {
+    this.setState({ mounted: false });
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.movie.movies) {
       this.setState({ movies: nextProps.movie.movies });
@@ -40,7 +49,7 @@ class MovieSearch extends Component {
     });
   };
   render() {
-    const { movies, moviesearch, searched } = this.state;
+    const { movies, moviesearch, searched, mounted } = this.state;
 
     let movieContent = null;
 
@@ -72,15 +81,13 @@ class MovieSearch extends Component {
                     onChange={e => this.onChangeHandler(e)}
                   />
                 </FormGroup>
-
-                {/* {moviesearch.length > 0 ? <Button>Search</Button> : null} */}
               </Form>
             </Col>
           </Jumbotron>
 
           {movieContent}
 
-          {searched ? null : (
+          {searched && moviesearch.length > 1 && mounted ? null : (
             <Typist
               className="MyTypist"
               cursor={{ blink: true, fontSize: "60px" }}
