@@ -19,6 +19,7 @@ router.post("/register", (req, res) => {
   const errors = {};
   const username = req.body.username;
   const password = req.body.password;
+  const displayname = req.body.displayname;
 
   User.findOne({ username: username }).then(user => {
     // Check if User Exists
@@ -29,7 +30,8 @@ router.post("/register", (req, res) => {
       //create the new user
       const newUser = new User({
         username: username,
-        password: password
+        password: password,
+        displayname: displayname
       });
 
       // hash the new user password
