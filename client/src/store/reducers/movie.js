@@ -1,4 +1,4 @@
-import { SET_MOVIES, SET_MOVIE } from "../actions/types";
+import { GET_MOVIES, GET_MOVIE } from "../actions/types";
 
 const initialState = {
   movies: [],
@@ -8,13 +8,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_MOVIES:
+    case GET_MOVIES:
       return {
         ...state,
         movies: action.payload,
         searched: true
       };
-    case SET_MOVIE:
+    case GET_MOVIE:
       return {
         ...state,
         movie: action.payload

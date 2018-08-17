@@ -27,36 +27,44 @@ router.post("/register", (req, res) => {
       errors.username = "Username already taken";
       return res.status(400).json(errors);
     } else {
-      //create the new user
-      const newUser = new User({
-        username: username,
-        password: password,
-        displayname: displayname
-      });
+      // Check if display name is taken
+      User.findOne({ displayname: displayname }).then(user => {
+        if (user) {
+          errors.displayname = "Display name already taken";
+          return res.status(400).json(errors);
+        } else {
+          //create the new user
+          const newUser = new User({
+            username: username,
+            password: password,
+            displayname: displayname
+          });
 
-      // hash the new user password
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          newUser.password = hash;
-          //save the new user
-          newUser
-            .save()
-            .then(user => {
-              //create the new user profile
-              const newProfile = new Profile({
-                user: user._id
-              });
-
-              newProfile
+          // hash the new user password
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
+              //save the new user
+              newUser
                 .save()
-                .then(profile => {
-                  return res.status(200).json({ user, profile });
+                .then(user => {
+                  //create the new user profile
+                  const newProfile = new Profile({
+                    user: user._id
+                  });
+
+                  newProfile
+                    .save()
+                    .then(profile => {
+                      return res.status(200).json({ user, profile });
+                    })
+                    .catch(err => console.log(err));
                 })
                 .catch(err => console.log(err));
-            })
-            .catch(err => console.log(err));
-        });
+            });
+          });
+        }
       });
     }
   });

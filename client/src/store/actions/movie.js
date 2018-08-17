@@ -1,4 +1,4 @@
-import { SET_MOVIES, SET_MOVIE } from "./types";
+import { GET_MOVIES, GET_MOVIE } from "./types";
 import axios from "axios";
 
 // Get all movies from api
@@ -12,7 +12,7 @@ export const getMovies = searchTerm => dispatch => {
 // Send movies to state
 export const setMovies = data => {
   return {
-    type: SET_MOVIES,
+    type: GET_MOVIES,
     payload: data
   };
 };
@@ -28,7 +28,7 @@ export const getMovie = id => dispatch => {
 // Send single movie to state
 export const setMovie = movie => {
   return {
-    type: SET_MOVIE,
+    type: GET_MOVIE,
     payload: movie
   };
 };

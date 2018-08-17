@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Container,
   FormGroup,
@@ -9,6 +10,7 @@ import {
   Button
 } from "reactstrap";
 import "./Register.css";
+import { registerUser } from "../../../store/actions/auth";
 
 class Register extends Component {
   state = {
@@ -32,7 +34,7 @@ class Register extends Component {
       displayname: displayname
     };
 
-    console.log(newUser);
+    this.props.registerUser(newUser, this.props.history);
   };
   render() {
     const { username, password, displayname } = this.state;
@@ -85,4 +87,7 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default connect(
+  null,
+  { registerUser }
+)(Register);
