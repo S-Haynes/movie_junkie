@@ -22,6 +22,13 @@ const ProfileSchema = new Schema({
       },
       plot: {
         type: String
+      },
+      poster: {
+        type: String
+      },
+      date: {
+        type: Date,
+        default: Date.now
       }
     }
   ],
@@ -41,6 +48,13 @@ const ProfileSchema = new Schema({
       },
       plot: {
         type: String
+      },
+      poster: {
+        type: String
+      },
+      date: {
+        type: Date,
+        default: Date.now
       }
     }
   ]

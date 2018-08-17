@@ -75,6 +75,7 @@ router.post(
     if (req.body.rated) movieToAdd.rated = req.body.rated;
     if (req.body.genre) movieToAdd.genre = req.body.genre;
     if (req.body.plot) movieToAdd.plot = req.body.plot;
+    if (req.body.poster) movieToAdd.poster = req.body.poster;
 
     Profile.findOne({ user: req.user.id })
       .then(profile => {
@@ -118,6 +119,7 @@ router.post(
     if (req.body.rated) movieToAdd.rated = req.body.rated;
     if (req.body.genre) movieToAdd.genre = req.body.genre;
     if (req.body.plot) movieToAdd.plot = req.body.plot;
+    if (req.body.poster) movieToAdd.poster = req.body.poster;
 
     Profile.findOne({ user: req.user.id })
       .then(profile => {
