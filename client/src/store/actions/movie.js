@@ -24,6 +24,7 @@ export const getMovie = id => dispatch => {
     .then(res => dispatch(setMovie(res.data)))
     .catch(err => console.log(err));
 };
+
 // Send single movie to state
 export const setMovie = movie => {
   return {
