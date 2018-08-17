@@ -7,6 +7,13 @@ const keys = require("./config/keys");
 const profileRoutes = require("./routes/api/profile");
 const userRoutes = require("./routes/api/users");
 
+// Body-Parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Passport middleware
+app.use(passport.initialize());
+
 // connect to db
 mongoose
   .connect(
