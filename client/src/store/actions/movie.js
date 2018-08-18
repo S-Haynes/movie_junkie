@@ -1,4 +1,4 @@
-import { GET_MOVIES, GET_MOVIE } from "./types";
+import { GET_MOVIES, GET_MOVIE, CLEAR_MOVIE_ADDED } from "./types";
 import axios from "axios";
 
 // Get all movies from api
@@ -19,9 +19,14 @@ export const setMovies = data => {
 
 // Get single movie
 export const getMovie = id => dispatch => {
+  dispatch({
+    type: CLEAR_MOVIE_ADDED
+  });
   axios
     .get("http://www.omdbapi.com/?i=" + id + "&apikey=108b0f56")
-    .then(res => dispatch(setMovie(res.data)))
+    .then(res => {
+      dispatch(setMovie(res.data));
+    })
     .catch(err => console.log(err));
 };
 

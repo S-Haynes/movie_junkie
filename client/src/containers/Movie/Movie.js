@@ -6,22 +6,28 @@ import {
   CardImg,
   Jumbotron,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Button
 } from "reactstrap";
 import "./Movie.css";
 import Link from "../../../node_modules/react-router-dom/Link";
 import { connect } from "react-redux";
 import { getMovie } from "../../store/actions/movie";
+import { addToBucketList, addToWatchedList } from "../../store/actions/profile";
 import setAuthToken from "../../utility/setAuthToken";
 
 class Movie extends Component {
   state = {
-    movie: {}
+    movie: {},
+    movieAdded: null
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     setAuthToken(false);
-    this.props.getMovie(this.props.match.params.id);
+    await this.props.getMovie(this.props.match.params.id);
+    if (localStorage.jwtToken) {
+      setAuthToken(localStorage.jwtToken);
+    }
   }
 
   componentWillUnmount() {
@@ -30,14 +36,42 @@ class Movie extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.movie.movie) {
-      this.setState({ movie: nextProps.movie.movie });
-    }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.movie.movie !== prevState.movie ||
+      nextProps.profile.movieAdded
+    ) {
+      return {
+        movie: nextProps.movie.movie,
+        movieAdded: nextProps.profile.movieAdded
+      };
+    } else return null;
   }
 
+  bucketListHandler = () => {
+    const movieData = {};
+    this.state.movie.Title ? (movieData.title = this.state.movie.Title) : null;
+    this.state.movie.Year ? (movieData.year = this.state.movie.Year) : null;
+    this.state.movie.Rated ? (movieData.rated = this.state.movie.Rated) : null;
+    this.state.movie.Genre ? (movieData.genre = this.state.movie.Genre) : null;
+    this.state.movie.Plot ? (movieData.plot = this.state.movie.Plot) : null;
+
+    this.props.addToBucketList(movieData);
+  };
+
+  alreadyWatchedHandler = () => {
+    const movieData = {};
+    this.state.movie.Title ? (movieData.title = this.state.movie.Title) : null;
+    this.state.movie.Year ? (movieData.year = this.state.movie.Year) : null;
+    this.state.movie.Rated ? (movieData.rated = this.state.movie.Rated) : null;
+    this.state.movie.Genre ? (movieData.genre = this.state.movie.Genre) : null;
+    this.state.movie.Plot ? (movieData.plot = this.state.movie.Plot) : null;
+
+    this.props.addToWatchedList(movieData);
+  };
+
   render() {
-    const { movie } = this.state;
+    const { movie, movieAdded } = this.state;
     return (
       <div style={{ marginTop: "50px" }}>
         <Container style={{ padding: "0", marginBottom: "10px" }}>
@@ -129,6 +163,32 @@ class Movie extends Component {
               }}
             />
           </Row>
+
+          <div className="text-center">
+            {movieAdded ? (
+              <h3>{movie.Title} has been added to your list.</h3>
+            ) : (
+              <span>
+                <div className="text-center d-block">
+                  <h3>Have you watched {movie.Title}?</h3>
+                </div>
+                <div className="mt-4 mx-auto text-center">
+                  <Button
+                    onClick={this.bucketListHandler}
+                    className="mb-3 mr-4"
+                  >
+                    Add to Bucketlist
+                  </Button>
+                  <Button
+                    className="mb-3 mr-4"
+                    onClick={this.alreadyWatchedHandler}
+                  >
+                    Already Watched
+                  </Button>
+                </div>
+              </span>
+            )}
+          </div>
         </Container>
       </div>
     );
@@ -136,10 +196,11 @@ class Movie extends Component {
 }
 
 const mapStateToProps = state => ({
-  movie: state.movie
+  movie: state.movie,
+  profile: state.profile
 });
 
 export default connect(
   mapStateToProps,
-  { getMovie }
+  { getMovie, addToBucketList, addToWatchedList }
 )(Movie);

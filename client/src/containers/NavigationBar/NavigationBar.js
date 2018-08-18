@@ -72,8 +72,9 @@ class NavigationBar extends Component {
             MovieJunkie
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleHandler} />
-          <Collapse isOpen={this.state.isOpen} navbar />
-          {isAuthenticated ? authLinks : guestLinks}
+          <Collapse isOpen={this.state.isOpen} navbar>
+            {isAuthenticated ? authLinks : guestLinks}
+          </Collapse>
         </Navbar>
       </div>
     );

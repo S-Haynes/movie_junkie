@@ -1,6 +1,8 @@
 export const GET_MOVIES = "GET_MOVIES";
 export const GET_MOVIE = "GET_MOVIE";
 export const MOVIE_SEARCHED = "MOVIE_SEARCHED";
+export const MOVIE_ADDED = "MOVIE_ADDED";
+export const CLEAR_MOVIE_ADDED = "CLEAR_MOVIE_ADDED";
 
 export const GET_PROFILES = "GET_PROFILES";
 export const GET_PROFILE = "GET_PROFILE";
