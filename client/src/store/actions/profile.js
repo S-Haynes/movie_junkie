@@ -2,7 +2,9 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   PROFILE_LOADING,
-  MOVIE_ADDED
+  MOVIE_ADDED,
+  DELETE_BUCKET_ITEM,
+  DELETE_WATCHED_ITEM
 } from "./types";
 import axios from "axios";
 
@@ -40,6 +42,19 @@ export const addToWatchedList = movieData => dispatch => {
     .post("/api/profile/watchedmovie", movieData)
     .then(res => dispatch(movieAdded()))
     .catch(err => console.log(err.response.data));
+};
+
+export const deleteBucketItem = id => {
+  return {
+    type: DELETE_BUCKET_ITEM,
+    payload: id
+  };
+};
+export const deleteWatchedItem = id => {
+  return {
+    type: DELETE_WATCHED_ITEM,
+    payload: id
+  };
 };
 
 export const movieAdded = () => {

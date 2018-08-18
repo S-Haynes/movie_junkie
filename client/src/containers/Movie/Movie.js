@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { getMovie } from "../../store/actions/movie";
 import { addToBucketList, addToWatchedList } from "../../store/actions/profile";
 import setAuthToken from "../../utility/setAuthToken";
+import ImageNotFound from "../../assets/img/image-not-found.png";
 
 class Movie extends Component {
   state = {
@@ -50,22 +51,24 @@ class Movie extends Component {
 
   bucketListHandler = () => {
     const movieData = {};
-    this.state.movie.Title ? (movieData.title = this.state.movie.Title) : null;
-    this.state.movie.Year ? (movieData.year = this.state.movie.Year) : null;
-    this.state.movie.Rated ? (movieData.rated = this.state.movie.Rated) : null;
-    this.state.movie.Genre ? (movieData.genre = this.state.movie.Genre) : null;
-    this.state.movie.Plot ? (movieData.plot = this.state.movie.Plot) : null;
+    if (this.state.movie.Title) movieData.title = this.state.movie.Title;
+    if (this.state.movie.Year) movieData.year = this.state.movie.Year;
+    if (this.state.movie.Rated) movieData.rated = this.state.movie.Rated;
+    if (this.state.movie.Genre) movieData.genre = this.state.movie.Genre;
+    if (this.state.movie.Plot) movieData.plot = this.state.movie.Plot;
+    if (this.state.movie.Poster) movieData.poster = this.state.movie.Poster;
 
     this.props.addToBucketList(movieData);
   };
 
   alreadyWatchedHandler = () => {
     const movieData = {};
-    this.state.movie.Title ? (movieData.title = this.state.movie.Title) : null;
-    this.state.movie.Year ? (movieData.year = this.state.movie.Year) : null;
-    this.state.movie.Rated ? (movieData.rated = this.state.movie.Rated) : null;
-    this.state.movie.Genre ? (movieData.genre = this.state.movie.Genre) : null;
-    this.state.movie.Plot ? (movieData.plot = this.state.movie.Plot) : null;
+    if (this.state.movie.Title) movieData.title = this.state.movie.Title;
+    if (this.state.movie.Year) movieData.year = this.state.movie.Year;
+    if (this.state.movie.Rated) movieData.rated = this.state.movie.Rated;
+    if (this.state.movie.Genre) movieData.genre = this.state.movie.Genre;
+    if (this.state.movie.Plot) movieData.plot = this.state.movie.Plot;
+    if (this.state.movie.Poster) movieData.poster = this.state.movie.Poster;
 
     this.props.addToWatchedList(movieData);
   };
@@ -92,7 +95,11 @@ class Movie extends Component {
                   minWidth: "200px",
                   marginBottom: "50px"
                 }}
-                src={movie.Poster}
+                src={
+                  movie.Poster === "N/A" || movie.Poster === undefined
+                    ? ImageNotFound
+                    : movie.Poster
+                }
                 alt="Poster"
               />
             </Col>

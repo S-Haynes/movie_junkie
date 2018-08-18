@@ -1,0 +1,14 @@
+.ListItem {
+  transition: all 0.5s;
+}
+.ListItem:hover {
+  background: black;
+}
+
+.deleteListItem {
+  color: white;
+}
+.deleteListItem:hover {
+  color: red;
+  text-decoration: none;
+}

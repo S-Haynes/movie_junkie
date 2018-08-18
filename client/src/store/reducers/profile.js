@@ -3,7 +3,9 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   MOVIE_ADDED,
-  CLEAR_MOVIE_ADDED
+  CLEAR_MOVIE_ADDED,
+  DELETE_BUCKET_ITEM,
+  DELETE_WATCHED_ITEM
 } from "../actions/types";
 
 const initialState = {
@@ -42,6 +44,26 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         movieAdded: false
+      };
+    case DELETE_BUCKET_ITEM:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          movielist: state.profile.movielist.filter(
+            movie => movie._id !== action.payload
+          )
+        }
+      };
+    case DELETE_WATCHED_ITEM:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          watchedlist: state.profile.watchedlist.filter(
+            movie => movie._id !== action.payload
+          )
+        }
       };
     default:
       return state;
