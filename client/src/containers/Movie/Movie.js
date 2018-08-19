@@ -12,7 +12,7 @@ import {
 import "./Movie.css";
 import Link from "../../../node_modules/react-router-dom/Link";
 import { connect } from "react-redux";
-import { getMovie } from "../../store/actions/movie";
+import { getMovie, clearMovie } from "../../store/actions/movie";
 import { addToBucketList, addToWatchedList } from "../../store/actions/profile";
 import setAuthToken from "../../utility/setAuthToken";
 import ImageNotFound from "../../assets/img/image-not-found.png";
@@ -32,6 +32,7 @@ class Movie extends Component {
   }
 
   componentWillUnmount() {
+    this.props.clearMovie();
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
     }
@@ -209,5 +210,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getMovie, addToBucketList, addToWatchedList }
+  { getMovie, addToBucketList, addToWatchedList, clearMovie }
 )(Movie);

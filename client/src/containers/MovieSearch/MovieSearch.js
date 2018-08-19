@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMovies } from "../../store/actions/movie";
+import {
+  getMovies,
+  clearMovieSearch,
+  getNextMovies
+} from "../../store/actions/movie";
 import { Jumbotron, Container, Col, Input, Form, FormGroup } from "reactstrap";
 import MovieFeed from "../../components/MovieFeed/MovieFeed";
 import Typist from "react-typist";
@@ -13,46 +17,76 @@ class MovieSearch extends Component {
     moviesearch: "",
     movies: [],
     searched: false,
-    mounted: false
+    mounted: false,
+    page: 1
   };
 
   componentDidMount() {
     setAuthToken(false);
-    this.setState({ mounted: true });
+    this.setState({ mounted: true, page: 1 });
   }
 
   componentWillUnmount() {
-    this.setState({ mounted: false });
+    this.props.clearMovieSearch();
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.movie.movies) {
-      this.setState({ movies: nextProps.movie.movies });
-    }
 
-    if (nextProps.movie.searched) {
-      this.setState({ searched: nextProps.movie.searched });
-    }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.movie.movies !== prevState.movies ||
+      nextProps.movie.searched !== prevState.searched
+    ) {
+      return {
+        movies: nextProps.movie.movies,
+        searched: nextProps.movie.searched
+      };
+    } else return null;
   }
+
   onSubmitHandler = e => {
     e.preventDefault();
     console.log(this.state.moviesearch);
-    this.getData(this.state.moviesearch);
+    this.getData(this.state.moviesearch, this.state.page);
   };
 
-  getData = searchTerm => {
-    this.props.getMovies(searchTerm);
+  getData = (searchTerm, page) => {
+    this.props.getMovies(searchTerm, page);
   };
 
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value }, e => {
-      if (this.state.moviesearch && this.state.moviesearch.length > 1) {
-        this.getData(this.state.moviesearch);
+      if (this.state.moviesearch) {
+        this.getData(this.state.moviesearch, this.state.page);
       }
     });
   };
+
+  onKeyDownHandler = e => {
+    if (e.keyCode > 0) {
+      this.setState({ page: 1 });
+    }
+  };
+
+  constructor(props) {
+    super(props);
+    window.onscroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.body.scrollHeight
+      ) {
+        this.setState(prevState => {
+          return {
+            page: prevState.page + 1
+          };
+        });
+
+        this.props.getNextMovies(this.state.moviesearch, this.state.page);
+      }
+    };
+  }
+
   render() {
     const { movies, moviesearch, searched, mounted } = this.state;
 
@@ -84,13 +118,13 @@ class MovieSearch extends Component {
                     name="moviesearch"
                     placeholder="Search for Movies"
                     onChange={e => this.onChangeHandler(e)}
+                    onKeyDown={e => this.onKeyDownHandler(e)}
                   />
                 </FormGroup>
               </Form>
             </Col>
           </Jumbotron>
-
-          {movieContent}
+          <div className="movie-content-body">{movieContent}</div>
 
           {searched || (moviesearch.length > 1 && mounted) ? null : (
             <Typist
@@ -114,5 +148,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getMovies }
+  { getMovies, clearMovieSearch, getNextMovies }
 )(MovieSearch);
