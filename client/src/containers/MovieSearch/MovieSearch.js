@@ -23,7 +23,20 @@ class MovieSearch extends Component {
 
   componentDidMount() {
     setAuthToken(false);
-    this.setState({ mounted: true, page: 1 });
+    window.onscroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.body.scrollHeight
+      ) {
+        this.setState(prevState => {
+          return {
+            page: prevState.page + 1
+          };
+        });
+
+        this.props.getNextMovies(this.state.moviesearch, this.state.page);
+      }
+    };
   }
 
   componentWillUnmount() {
@@ -31,6 +44,7 @@ class MovieSearch extends Component {
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
     }
+    window.onscroll = null;
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -69,31 +83,20 @@ class MovieSearch extends Component {
     }
   };
 
-  constructor(props) {
-    super(props);
-    window.onscroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.body.scrollHeight
-      ) {
-        this.setState(prevState => {
-          return {
-            page: prevState.page + 1
-          };
-        });
-
-        this.props.getNextMovies(this.state.moviesearch, this.state.page);
-      }
-    };
-  }
-
   render() {
     const { movies, moviesearch, searched, mounted } = this.state;
 
     let movieContent = null;
 
     if (movies && movies.length > 0 && searched) {
-      movieContent = <MovieFeed movies={movies} />;
+      movieContent = (
+        <div>
+          <Container>
+            <p>Scroll down for additional movies results.</p>
+          </Container>
+          <MovieFeed movies={movies} />
+        </div>
+      );
     } else if (!searched) {
       movieContent = null;
     } else {
@@ -126,7 +129,7 @@ class MovieSearch extends Component {
           </Jumbotron>
           <div className="movie-content-body">{movieContent}</div>
 
-          {searched || (moviesearch.length > 1 && mounted) ? null : (
+          {/* {searched || (moviesearch.length > 1 && mounted) ? null : (
             <Typist
               className="MyTypist"
               cursor={{ blink: true, fontSize: "60px" }}
@@ -136,7 +139,7 @@ class MovieSearch extends Component {
               <Typist.Backspace count={19} delay={1000} />
               <span className="Typist2">Search for your favorite movie...</span>
             </Typist>
-          )}
+          )} */}
         </Container>
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import {
   Container,
   FormGroup,
@@ -37,8 +38,18 @@ class Login extends Component {
 
   render() {
     const { username, password } = this.state;
+    const { isAuthenticated } = this.props.auth;
+
+    let redirect;
+
+    if (isAuthenticated) {
+      redirect = <Redirect to="/dashboard" />;
+    } else {
+      redirect = null;
+    }
     return (
       <div className="login">
+        {redirect}
         <Container>
           <Jumbotron style={{ background: "#111" }}>
             <div className="text-center">
@@ -77,7 +88,11 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { loginUser }
 )(Login);

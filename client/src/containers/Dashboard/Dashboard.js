@@ -9,9 +9,9 @@ import {
 import { Container, Col, Row, Jumbotron } from "reactstrap";
 import BucketListFeed from "../../components/BucketListFeed/BucketListFeed";
 import WatchedListFeed from "../../components/WatchedListFeed/WatchedListFeed";
-import "./Profile.css";
+import "./Dashboard.css";
 
-class Profile extends Component {
+class Dashboard extends Component {
   componentDidMount() {
     this.props.getProfile();
   }
@@ -20,7 +20,6 @@ class Profile extends Component {
     const { isAuthenticated } = this.props.auth;
     const { user, movielist, watchedlist } = this.props.profile.profile;
     const { loading, profile } = this.props.profile;
-    console.log(this.props.profile);
     // Auth logic
     let redirect;
 
@@ -121,4 +120,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getProfile, deleteBucketItem, deleteWatchedItem }
-)(Profile);
+)(Dashboard);

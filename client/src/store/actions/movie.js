@@ -28,7 +28,7 @@ export const getMovies = (searchTerm, page) => dispatch => {
     .catch(err => console.log(err));
 };
 
-// Get next page of movies
+//Get next page of movies
 export const getNextMovies = (searchTerm, page) => dispatch => {
   axios
     .get(
@@ -68,7 +68,7 @@ export const getMovie = id => dispatch => {
     type: CLEAR_MOVIE_ADDED
   });
   axios
-    .get("http://www.omdbapi.com/?i=" + id + "&apikey=108b0f56")
+    .get("http://www.omdbapi.com/?i=" + id + "&apikey=108b0f56&plot=full")
     .then(res => {
       dispatch(setMovie(res.data));
     })
@@ -95,3 +95,49 @@ export const clearMovie = () => {
     type: CLEAR_MOVIE
   };
 };
+
+// export const getMovies = (searchTerm, page) => dispatch => {
+//   dispatch(clearMovieSearch());
+//   axios
+//     .get(
+//       "https://api.themoviedb.org/3/search/movie?api_key=f8bb5321b2ac567dcd6e70a2e065f9a9&language=en-US&query=" +
+//         searchTerm +
+//         "&page=" +
+//         page +
+//         "&include_adult=false"
+//     )
+//     .then(res => {
+//       if (
+//         res.data.results === undefined ||
+//         res.data.results === null ||
+//         res.data.results.length === 0
+//       ) {
+//         return;
+//       }
+//       dispatch(setMovies(res.data.results));
+//     })
+//     .catch(err => console.log(err));
+// };
+
+// // Get next page of movies
+// export const getNextMovies = (searchTerm, page) => dispatch => {
+//   axios
+//     .get(
+//       "https://api.themoviedb.org/3/search/movie?api_key=f8bb5321b2ac567dcd6e70a2e065f9a9&language=en-US&query=" +
+//         searchTerm +
+//         "&page=" +
+//         page +
+//         "&include_adult=false"
+//     )
+//     .then(res => {
+//       if (
+//         res.data.results === undefined ||
+//         res.data.results === null ||
+//         res.data.results.length === 0
+//       ) {
+//         return;
+//       }
+//       dispatch(setNextMovies(res.data.results));
+//     })
+//     .catch(err => console.log(err));
+// };

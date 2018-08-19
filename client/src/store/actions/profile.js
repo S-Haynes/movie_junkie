@@ -44,17 +44,27 @@ export const addToWatchedList = movieData => dispatch => {
     .catch(err => console.log(err.response.data));
 };
 
-export const deleteBucketItem = id => {
-  return {
-    type: DELETE_BUCKET_ITEM,
-    payload: id
-  };
+export const deleteBucketItem = id => dispatch => {
+  axios
+    .delete("/api/profile/bucketlist/" + id)
+    .then(res =>
+      dispatch({
+        type: DELETE_BUCKET_ITEM,
+        payload: id
+      })
+    )
+    .catch(err => console.log(err.response.data));
 };
-export const deleteWatchedItem = id => {
-  return {
-    type: DELETE_WATCHED_ITEM,
-    payload: id
-  };
+export const deleteWatchedItem = id => dispatch => {
+  axios
+    .delete("/api/profile/alreadywatched/" + id)
+    .then(res =>
+      dispatch({
+        type: DELETE_WATCHED_ITEM,
+        payload: id
+      })
+    )
+    .catch(err => console.log(err.response.data));
 };
 
 export const movieAdded = () => {

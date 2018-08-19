@@ -151,6 +151,76 @@ router.post(
 );
 // TODO:
 // DELETE - remove movie from watch list
+router.delete(
+  "/bucketlist/:movie_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile) {
+          errors.unauthorized = "User not authorized to make this request";
+          return res.status(401).json(errors);
+        }
+
+        // find index of movie to delete from bucket list
+        const removeIndex = profile.movielist.findIndex(movie =>
+          movie._id.equals(req.params.movie_id)
+        );
+
+        //splice movie from the array
+        profile.movielist.splice(removeIndex, 1);
+
+        //save the profile
+        profile
+          .save()
+          .then(profile => res.status(200).json(profile))
+          .catch(err => {
+            errors.dberror = "Profile could not be saved";
+            return res.status(400).json(errors);
+          });
+      })
+      .catch(err => {
+        errors.profile = "Profile could not be found";
+        return res.status(404).json(errors);
+      });
+  }
+);
 
 // DELETE - remove movie from already watched list
+router.delete(
+  "/alreadywatched/:movie_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile) {
+          errors.unauthorized = "User not authorized to make this request";
+          return res.status(401).json(errors);
+        }
+
+        // find index of movie to delete from watched list
+        const removeIndex = profile.watchedlist.findIndex(movie =>
+          movie._id.equals(req.params.movie_id)
+        );
+
+        //splice movie from the array
+        profile.watchedlist.splice(removeIndex, 1);
+
+        //save the profile
+        profile
+          .save()
+          .then(profile => res.status(200).json(profile))
+          .catch(err => {
+            errors.dberror = "Profile could not be saved";
+            return res.status(400).json(errors);
+          });
+      })
+      .catch(err => {
+        errors.profile = "Profile could not be found";
+        return res.status(404).json(errors);
+      });
+  }
+);
 module.exports = router;

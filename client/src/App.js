@@ -10,7 +10,7 @@ import Movie from "./containers/Movie/Movie";
 import Register from "./containers/Auth/Register/Register";
 import Login from "./containers/Auth/Login/Login";
 import Home from "./components/Home/Home";
-import Profile from "./containers/Profile/Profile";
+import Dashboard from "./containers/Dashboard/Dashboard";
 
 import setAuthToken from "./utility/setAuthToken";
 import { setCurrentUser, logoutUser } from "./store/actions/auth";
@@ -19,7 +19,6 @@ import jwt_decode from "jwt-decode";
 // Check if token is in local storage
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
-
   // Set auth header
   setAuthToken(token);
 
@@ -30,10 +29,16 @@ if (localStorage.jwtToken) {
   // Check if token expired
   const currentTime = Date.now() / 1000;
 
-  if (decodedUser.exp < currentTime) {
-    // log the user out
+  // Logout the user after one hour
+  setTimeout(() => {
     store.dispatch(logoutUser());
+    //relocate the user
+    window.location.href = "/login";
+  }, 3600000);
 
+  // Logout the user on page refresh if token is expired
+  if (decodedUser.exp < currentTime) {
+    store.dispatch(logoutUser());
     //relocate the user
     window.location.href = "/login";
   }
@@ -52,7 +57,7 @@ class App extends Component {
                 <Route exact path="/movie/:id" component={Movie} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/dashboard" component={Profile} />
+                <Route exact path="/dashboard" component={Dashboard} />
               </Switch>
             </div>
           </Layout>
