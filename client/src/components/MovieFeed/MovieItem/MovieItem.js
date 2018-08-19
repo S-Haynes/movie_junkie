@@ -24,7 +24,7 @@ class MovieItem extends Component {
   };
 
   onClickHandler = e => {
-    this.props.history.push("/movie/" + this.props.movie.imdbID);
+    this.props.history.push("/movie/" + this.props.movie.id);
   };
   render() {
     const { movie } = this.props;
@@ -53,9 +53,11 @@ class MovieItem extends Component {
               height="100%"
               style={{ minHeight: "300px", maxHeight: "300px" }}
               src={
-                movie.Poster === "N/A" || movie.Poster === undefined
+                movie.poster_path === "N/A" ||
+                movie.poster_path === undefined ||
+                movie.poster_path === null
                   ? ImageNotFound
-                  : movie.Poster
+                  : "https://image.tmdb.org/t/p/w500" + movie.poster_path
               }
               alt="poster"
             />
@@ -79,9 +81,9 @@ class MovieItem extends Component {
                   }}
                 >
                   <CardTitle style={{ textAlign: "center" }}>
-                    {movie.Title.slice(0, 30) + "..."}
+                    {movie.title.slice(0, 30) + "..."}
                   </CardTitle>
-                  <CardSubtitle>{movie.Year.slice(0, 4)}</CardSubtitle>
+                  <CardSubtitle>{movie.release_date.slice(0, 4)}</CardSubtitle>
                 </CardBody>
               </span>
             ) : null}

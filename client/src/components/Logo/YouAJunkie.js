@@ -24,11 +24,11 @@ const YouAJunkie = props => {
         alt="Logo"
         style={{
           position: "absolute",
-          zIndex: "99",
+          zIndex: "6",
           top: "0",
           left: "0",
           width: "100%",
-          height: "105%",
+          height: "95%",
           margin: "auto"
         }}
       />

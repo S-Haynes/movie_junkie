@@ -52,163 +52,211 @@ class Movie extends Component {
 
   bucketListHandler = () => {
     const movieData = {};
-    if (this.state.movie.Title) movieData.title = this.state.movie.Title;
-    if (this.state.movie.Year) movieData.year = this.state.movie.Year;
-    if (this.state.movie.Rated) movieData.rated = this.state.movie.Rated;
-    if (this.state.movie.Genre) movieData.genre = this.state.movie.Genre;
-    if (this.state.movie.Plot) movieData.plot = this.state.movie.Plot;
-    if (this.state.movie.Poster) movieData.poster = this.state.movie.Poster;
+    if (this.state.movie.title) movieData.title = this.state.movie.title;
+    if (this.state.movie.release_date)
+      movieData.year = this.state.movie.release_date;
+    if (this.state.movie.vote_average)
+      movieData.rated = this.state.movie.vote_average;
+    if (this.state.movie.genres) movieData.genre = this.state.movie.genres;
+    if (this.state.movie.overview) movieData.plot = this.state.movie.overview;
+    if (this.state.movie.poster_path)
+      movieData.poster =
+        "https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path;
 
     this.props.addToBucketList(movieData);
   };
 
   alreadyWatchedHandler = () => {
     const movieData = {};
-    if (this.state.movie.Title) movieData.title = this.state.movie.Title;
-    if (this.state.movie.Year) movieData.year = this.state.movie.Year;
-    if (this.state.movie.Rated) movieData.rated = this.state.movie.Rated;
-    if (this.state.movie.Genre) movieData.genre = this.state.movie.Genre;
-    if (this.state.movie.Plot) movieData.plot = this.state.movie.Plot;
-    if (this.state.movie.Poster) movieData.poster = this.state.movie.Poster;
+    if (this.state.movie.title) movieData.title = this.state.movie.title;
+    if (this.state.movie.release_date)
+      movieData.year = this.state.movie.release_date;
+    if (this.state.movie.vote_average)
+      movieData.rated = this.state.movie.vote_average;
+    if (this.state.movie.genres) movieData.genre = this.state.movie.genres;
+    if (this.state.movie.overview) movieData.plot = this.state.movie.overview;
+    if (this.state.movie.poster_path)
+      movieData.poster =
+        "https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path;
 
     this.props.addToWatchedList(movieData);
   };
 
   render() {
     const { movie, movieAdded } = this.state;
-    return (
-      <div style={{ marginTop: "50px" }}>
-        <Container style={{ padding: "0", marginBottom: "10px" }}>
-          <Link to="/search" className="btn btn-outline-dark btn-lg">
-            {" "}
-            Back to Search
-          </Link>
-        </Container>
-        <Container
-          style={{ color: "white", background: "#111", padding: "50px" }}
-        >
-          <Row>
-            <Col lg="6">
-              <CardImg
-                style={{
-                  maxHeight: "600px",
-                  minHeight: "300px",
-                  minWidth: "200px",
-                  marginBottom: "50px"
-                }}
-                src={
-                  movie.Poster === "N/A" || movie.Poster === undefined
-                    ? ImageNotFound
-                    : movie.Poster
-                }
-                alt="Poster"
-              />
-            </Col>
-            <Col lg="6">
-              <h2 className="mb-4">
-                {movie.Title} ({movie.Year})
-              </h2>
-              <Jumbotron style={{ background: "#232323" }}>
-                <ListGroup>
-                  {movie.Actors === "N/A" ? null : (
-                    <ListGroupItem>
-                      <strong>Actors:</strong> {movie.Actors}
-                      {movie.Director === "N/A" ? null : (
-                        <div className="mt-3">
-                          <strong>Director:</strong> {movie.Director}
-                        </div>
-                      )}
-                      <hr
-                        style={{
-                          width: "100%",
-                          border: "1px solid rgba(200, 200, 200, 0.2)",
-                          marginBottom: "0"
-                        }}
-                      />
-                    </ListGroupItem>
-                  )}
-                  {movie.Genre === "N/A" ? null : (
-                    <ListGroupItem>
-                      <strong>Genre:</strong> {movie.Genre}
-                    </ListGroupItem>
-                  )}
-                  {movie.Released === "N/A" ? null : (
-                    <ListGroupItem>
-                      <strong>Released:</strong> {movie.Released}
-                    </ListGroupItem>
-                  )}
-                  {movie.Rated === "N/A" ? null : (
-                    <ListGroupItem>
-                      <strong>Rated:</strong> {movie.Rated}
-                    </ListGroupItem>
-                  )}
-                  {movie.Runtime === "N/A" ? null : (
-                    <ListGroupItem>
-                      <strong>Runtime:</strong> {movie.Runtime}
-                    </ListGroupItem>
-                  )}
-                  {movie.BoxOffice === "N/A" ||
-                  movie.BoxOffice === undefined ? null : (
-                    <ListGroupItem>
-                      <strong>Box Office:</strong> {movie.BoxOffice}
-                    </ListGroupItem>
-                  )}
-                </ListGroup>
-              </Jumbotron>
-            </Col>
-          </Row>
-          <Row className="mt-4">
-            <Col md="12">
-              <h1>Plot</h1>
-            </Col>
-            <Col md="12">
-              <p>{movie.Plot}</p>
-            </Col>
-            <hr
+    const { isAuthenticated } = this.props.auth;
+    let movieContent;
+
+    if (Object.keys(movie).length === 0) {
+      movieContent = <h4> Loading... </h4>;
+    } else {
+      movieContent = (
+        <div style={{ marginTop: "20px" }}>
+          <div className="bg-overlay" />
+          {movie.backdrop_path === null ? null : (
+            <div
+              className="movie-bg"
               style={{
-                width: "80%",
-                border: "1px solid rgba(200, 200, 200, 0.2)"
+                backgroundImage: `url(https://image.tmdb.org/t/p/original${
+                  movie.backdrop_path
+                })`
               }}
             />
-          </Row>
+          )}
+          <Container style={{ padding: "0", marginBottom: "10px" }}>
+            <Link to="/search" className="btn btn-outline-dark btn-lg">
+              {" "}
+              Back to Search
+            </Link>
+          </Container>
+          <Container
+            style={{
+              color: "white",
+              background: "rgba(17, 17, 17, 1)",
+              padding: "50px",
+              marginBottom: "50px",
+              opacity: "0.95"
+            }}
+          >
+            <Row>
+              <Col lg="6">
+                <CardImg
+                  style={{
+                    maxHeight: "500px",
+                    minHeight: "300px",
+                    minWidth: "200px",
+                    marginBottom: "50px"
+                  }}
+                  src={
+                    movie.poster_path === "N/A" ||
+                    movie.poster_path === undefined ||
+                    movie.poster_path === null
+                      ? ImageNotFound
+                      : "https://image.tmdb.org/t/p/w500" + movie.poster_path
+                  }
+                  alt="Poster"
+                />
+              </Col>
+              <Col lg="6">
+                <h2 className="mb-4">
+                  {movie.title} ({movie.release_date.slice(0, 4)})
+                </h2>
+                <Jumbotron style={{ background: "#232323" }}>
+                  <ListGroup>
+                    {movie.genres.length === 0 ||
+                    movie.genres === null ? null : (
+                      <ListGroupItem>
+                        <strong>Genres:</strong>{" "}
+                        {movie.genres.map(genre => genre.name + ", ")}
+                      </ListGroupItem>
+                    )}
+                    {movie.release_date === null ? null : (
+                      <ListGroupItem>
+                        <strong>Released:</strong> {movie.release_date}
+                      </ListGroupItem>
+                    )}
+                    {movie.vote_average === null ? null : (
+                      <ListGroupItem>
+                        <strong>Rated:</strong> {movie.vote_average}
+                      </ListGroupItem>
+                    )}
+                    {movie.runtime === null || movie.runtime === "0" ? null : (
+                      <ListGroupItem>
+                        <strong>Runtime:</strong> {movie.runtime} mins
+                      </ListGroupItem>
+                    )}
+                    {movie.revenue === null ||
+                    movie.revenue === undefined ||
+                    movie.revenue === 0 ? null : (
+                      <ListGroupItem>
+                        <strong>Box Office:</strong> $
+                        {movie.revenue
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </ListGroupItem>
+                    )}
+                  </ListGroup>
+                </Jumbotron>
+              </Col>
+            </Row>
+            <Row className="mt-4">
+              <Col md="12">
+                <h1>Plot</h1>
+              </Col>
+              <Col md="12">
+                <p>{movie.overview}</p>
+              </Col>
+              <hr
+                style={{
+                  width: "80%",
+                  border: "1px solid rgba(200, 200, 200, 0.2)"
+                }}
+              />
+            </Row>
 
-          <div className="text-center">
-            {movieAdded ? (
-              <h3>{movie.Title} has been added to your list.</h3>
-            ) : (
-              <span>
-                <div className="text-center d-block">
-                  <h3>Have you watched {movie.Title}?</h3>
+            <div className="text-center">
+              {isAuthenticated ? (
+                <div>
+                  {" "}
+                  {movieAdded ? (
+                    <h3>{movie.title} has been added to your list.</h3>
+                  ) : (
+                    <span>
+                      <div className="text-center d-block">
+                        <h3>Have you watched {movie.title}?</h3>
+                      </div>
+                      <div className="mt-4 mx-auto text-center">
+                        <Button
+                          onClick={this.bucketListHandler}
+                          className="mb-3 mr-4"
+                        >
+                          Add to Bucketlist
+                        </Button>
+                        <Button
+                          className="mb-3 mr-4"
+                          onClick={this.alreadyWatchedHandler}
+                        >
+                          Already Watched
+                        </Button>
+                      </div>
+                    </span>
+                  )}{" "}
                 </div>
-                <div className="mt-4 mx-auto text-center">
-                  <Button
-                    onClick={this.bucketListHandler}
-                    className="mb-3 mr-4"
-                  >
-                    Add to Bucketlist
-                  </Button>
-                  <Button
-                    className="mb-3 mr-4"
-                    onClick={this.alreadyWatchedHandler}
-                  >
-                    Already Watched
-                  </Button>
-                </div>
-              </span>
-            )}
-          </div>
-        </Container>
-      </div>
-    );
+              ) : (
+                <h4>
+                  <Link to="/register">Sign Up</Link> to add movies to your
+                  watch list.
+                </h4>
+              )}
+            </div>
+          </Container>
+        </div>
+      );
+    }
+    return movieContent;
   }
 }
 
 const mapStateToProps = state => ({
   movie: state.movie,
-  profile: state.profile
+  profile: state.profile,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
   { getMovie, addToBucketList, addToWatchedList, clearMovie }
 )(Movie);
+
+// {movie.credits.cast.length === 0 ? null : (
+//   <ListGroupItem>
+//     <strong>Actors:</strong> {movie.ctors}
+//     <hr
+//       style={{
+//         width: "100%",
+//         border: "1px solid rgba(200, 200, 200, 0.2)",
+//         marginBottom: "0"
+//       }}
+//     />
+//   </ListGroupItem>
+// )}

@@ -5,47 +5,19 @@ import {
   clearMovieSearch,
   getNextMovies
 } from "../../store/actions/movie";
-import { Jumbotron, Container, Col, Input, Form, FormGroup } from "reactstrap";
+import { Container } from "reactstrap";
 import MovieFeed from "../../components/MovieFeed/MovieFeed";
 import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
 import "./MovieSearch.css";
 import setAuthToken from "../../utility/setAuthToken";
+import MovieSearchInput from "./MovieSearchInput";
 
 class MovieSearch extends Component {
   state = {
-    moviesearch: "",
     movies: [],
-    searched: false,
-    mounted: false,
-    page: 1
+    searched: false
   };
-
-  componentDidMount() {
-    setAuthToken(false);
-    window.onscroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.body.scrollHeight
-      ) {
-        this.setState(prevState => {
-          return {
-            page: prevState.page + 1
-          };
-        });
-
-        this.props.getNextMovies(this.state.moviesearch, this.state.page);
-      }
-    };
-  }
-
-  componentWillUnmount() {
-    this.props.clearMovieSearch();
-    if (localStorage.jwtToken) {
-      setAuthToken(localStorage.jwtToken);
-    }
-    window.onscroll = null;
-  }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (
@@ -59,32 +31,16 @@ class MovieSearch extends Component {
     } else return null;
   }
 
-  onSubmitHandler = e => {
-    e.preventDefault();
-    console.log(this.state.moviesearch);
-    this.getData(this.state.moviesearch, this.state.page);
-  };
-
-  getData = (searchTerm, page) => {
-    this.props.getMovies(searchTerm, page);
-  };
-
-  onChangeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value }, e => {
-      if (this.state.moviesearch) {
-        this.getData(this.state.moviesearch, this.state.page);
-      }
-    });
-  };
-
-  onKeyDownHandler = e => {
-    if (e.keyCode > 0) {
-      this.setState({ page: 1 });
+  componentWillUnmount() {
+    this.props.clearMovieSearch();
+    if (localStorage.jwtToken) {
+      setAuthToken(localStorage.jwtToken);
     }
-  };
+    window.onscroll = null;
+  }
 
   render() {
-    const { movies, moviesearch, searched, mounted } = this.state;
+    const { movies, searched } = this.state;
 
     let movieContent = null;
 
@@ -106,27 +62,7 @@ class MovieSearch extends Component {
     return (
       <div>
         <Container style={{ marginTop: "50px" }}>
-          <Jumbotron
-            style={{
-              textAlign: "center",
-              background: "rgba(100, 100, 100, 0.1)"
-            }}
-          >
-            <Col>
-              <Form onSubmit={e => this.onSubmitHandler(e)}>
-                <FormGroup>
-                  <Input
-                    value={moviesearch}
-                    type="text"
-                    name="moviesearch"
-                    placeholder="Search for Movies"
-                    onChange={e => this.onChangeHandler(e)}
-                    onKeyDown={e => this.onKeyDownHandler(e)}
-                  />
-                </FormGroup>
-              </Form>
-            </Col>
-          </Jumbotron>
+          <MovieSearchInput />
           <div className="movie-content-body">{movieContent}</div>
 
           {/* {searched || (moviesearch.length > 1 && mounted) ? null : (

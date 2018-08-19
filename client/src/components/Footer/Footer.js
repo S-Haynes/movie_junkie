@@ -11,8 +11,8 @@ const Footer = props => {
         background: "#070707",
         paddingTop: "20px",
         position: "absolute",
-        bottom: "-200px",
-        zIndex: "10",
+        bottom: "-160px",
+        zIndex: "10000000",
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
