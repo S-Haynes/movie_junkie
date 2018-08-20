@@ -23,6 +23,29 @@ export const setCurrentProfile = profile => {
   };
 };
 
+export const getProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/api/profile/all")
+    .then(res => dispatch(setCurrentProfiles(res.data)))
+    .catch(err => console.log(err.response.data));
+};
+
+export const getProfileByDisplayName = name => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/api/profile/displayname/" + name)
+    .then(res => dispatch(setCurrentProfile(res.data)))
+    .catch(err => console.log(err.response.data));
+};
+
+export const setCurrentProfiles = profiles => {
+  return {
+    type: GET_PROFILES,
+    payload: profiles
+  };
+};
+
 export const setProfileLoading = () => {
   return {
     type: PROFILE_LOADING

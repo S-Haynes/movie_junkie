@@ -12,6 +12,8 @@ import {
 } from "reactstrap";
 import "./Login.css";
 import { loginUser } from "../../../store/actions/auth";
+import BackgroundOverlay from "../../../components/UI/BackgroundOverlay/BackgroundOverlay";
+import AuthBg from "../../../assets/img/auth-bg.jpg";
 
 class Login extends Component {
   state = {
@@ -50,8 +52,9 @@ class Login extends Component {
     return (
       <div className="login">
         {redirect}
+        <BackgroundOverlay url={AuthBg} />
         <Container>
-          <Jumbotron style={{ background: "#111" }}>
+          <Jumbotron style={{ background: "rgba(17, 17, 17, 0.7)" }}>
             <div className="text-center">
               <h3>Login</h3>
             </div>

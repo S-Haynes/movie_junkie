@@ -44,14 +44,14 @@ class MovieSearchInput extends Component {
     window.onscroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
-        document.body.scrollHeight
+        document.body.scrollHeight - 150
       ) {
         this.setState(prevState => {
           return {
             page: prevState.page + 1
           };
         });
-
+        console.log(document.body.scrollHeight);
         this.props.getNextMovies(this.state.moviesearch, this.state.page);
       }
     };

@@ -45,6 +45,7 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem("jwtToken");
 
   //TODO clear current profile
+  window.location.reload();
 };
 
 export const setCurrentUser = (userData, auth) => {

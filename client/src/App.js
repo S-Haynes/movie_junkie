@@ -11,6 +11,8 @@ import Register from "./containers/Auth/Register/Register";
 import Login from "./containers/Auth/Login/Login";
 import Home from "./components/Home/Home";
 import Dashboard from "./containers/Dashboard/Dashboard";
+import Profiles from "./containers/Profiles/Profiles";
+import Profile from "./containers/Profile/Profile";
 
 import setAuthToken from "./utility/setAuthToken";
 import { setCurrentUser, logoutUser } from "./store/actions/auth";
@@ -58,6 +60,8 @@ class App extends Component {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/profiles" component={Profiles} />
+                <Route exact path="/profile/:displayname" component={Profile} />
               </Switch>
             </div>
           </Layout>

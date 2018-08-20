@@ -4,6 +4,8 @@ import {
   Col,
   Row,
   CardImg,
+  Card,
+  CardText,
   Jumbotron,
   ListGroup,
   ListGroupItem,
@@ -57,7 +59,8 @@ class Movie extends Component {
       movieData.year = this.state.movie.release_date;
     if (this.state.movie.vote_average)
       movieData.rated = this.state.movie.vote_average;
-    if (this.state.movie.genres) movieData.genre = this.state.movie.genres;
+    if (this.state.movie.genres)
+      movieData.genre = this.state.movie.genres.map(genre => " " + genre.name);
     if (this.state.movie.overview) movieData.plot = this.state.movie.overview;
     if (this.state.movie.poster_path)
       movieData.poster =
@@ -139,7 +142,11 @@ class Movie extends Component {
               </Col>
               <Col lg="6">
                 <h2 className="mb-4">
-                  {movie.title} ({movie.release_date.slice(0, 4)})
+                  {movie.title}
+                  {movie.release_date === null ||
+                  movie.release_date === "" ? null : (
+                    <span>({movie.release_date.slice(0, 4)})</span>
+                  )}
                 </h2>
                 <Jumbotron style={{ background: "#232323" }}>
                   <ListGroup>
@@ -150,12 +157,14 @@ class Movie extends Component {
                         {movie.genres.map(genre => genre.name + ", ")}
                       </ListGroupItem>
                     )}
-                    {movie.release_date === null ? null : (
+                    {movie.release_date === null ||
+                    movie.release_date === "" ? null : (
                       <ListGroupItem>
                         <strong>Released:</strong> {movie.release_date}
                       </ListGroupItem>
                     )}
-                    {movie.vote_average === null ? null : (
+                    {movie.vote_average === null ||
+                    movie.vote_average === 0 ? null : (
                       <ListGroupItem>
                         <strong>Rated:</strong> {movie.vote_average}
                       </ListGroupItem>
@@ -193,6 +202,58 @@ class Movie extends Component {
                 }}
               />
             </Row>
+            {movie.credits.cast.length === 0 ? null : (
+              <div className="d-block text-center">
+                <div className="flex-1 text-center">
+                  <h3>Lead Cast</h3>
+                </div>
+                <Row className="mb-4 d-flex justify-content-center">
+                  {movie.credits.cast.slice(0, 5).map(actor => (
+                    <Col
+                      className="mb-4 mr-4 d-flex justify-content-center"
+                      lg="2"
+                      md="4"
+                      sm="6"
+                    >
+                      <Card
+                        style={{
+                          background: "rgb(35, 35, 35)",
+                          height: "200px",
+                          minWidth: "150px",
+                          maxWidth: "200px"
+                        }}
+                      >
+                        <CardImg
+                          style={{
+                            maxHeight: "100%",
+                            minHeight: "100%",
+                            minWidth: "100%",
+                            maxWidth: "100%",
+                            marginBottom: "5px"
+                          }}
+                          src={
+                            actor.profile_path === "N/A" ||
+                            actor.profile_path === undefined ||
+                            actor.profile_path === null
+                              ? ImageNotFound
+                              : "https://image.tmdb.org/t/p/original" +
+                                actor.profile_path
+                          }
+                          alt="Actor"
+                        />
+                        <CardText>{actor.name}</CardText>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+                <hr
+                  style={{
+                    width: "80%",
+                    border: "1px solid rgba(200, 200, 200, 0.2)"
+                  }}
+                />
+              </div>
+            )}
 
             <div className="text-center">
               {isAuthenticated ? (
@@ -247,16 +308,3 @@ export default connect(
   mapStateToProps,
   { getMovie, addToBucketList, addToWatchedList, clearMovie }
 )(Movie);
-
-// {movie.credits.cast.length === 0 ? null : (
-//   <ListGroupItem>
-//     <strong>Actors:</strong> {movie.ctors}
-//     <hr
-//       style={{
-//         width: "100%",
-//         border: "1px solid rgba(200, 200, 200, 0.2)",
-//         marginBottom: "0"
-//       }}
-//     />
-//   </ListGroupItem>
-// )}

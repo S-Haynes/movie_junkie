@@ -29,7 +29,7 @@ class NavigationBar extends Component {
   };
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
     const guestLinks = (
       <Nav className="ml-auto" navbar>
         <NavItem>
@@ -47,6 +47,11 @@ class NavigationBar extends Component {
 
     const authLinks = (
       <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink tag={Link} to={"/profile/" + user.displayname}>
+            Profile
+          </NavLink>
+        </NavItem>
         <NavItem>
           <NavLink tag={Link} to="/dashboard">
             Dashboard
@@ -71,6 +76,13 @@ class NavigationBar extends Component {
           <NavbarBrand tag={Link} to="/">
             MovieJunkie
           </NavbarBrand>
+          <Nav navbar>
+            <NavItem>
+              <NavLink tag={Link} to="/profiles">
+                Meet the Junkies
+              </NavLink>
+            </NavItem>
+          </Nav>
           <NavbarToggler onClick={this.toggleHandler} />
           <Collapse isOpen={this.state.isOpen} navbar>
             {isAuthenticated ? authLinks : guestLinks}

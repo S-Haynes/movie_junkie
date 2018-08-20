@@ -1,0 +1,23 @@
+.profiles .movie-profile-bg {
+  border-radius: 0px !important;
+}
+
+.profiles a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.profiles a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.profiles .movie-profile-bg.no-movie {
+  max-height: 250px;
+}
+
+@media (max-width: 500px) {
+  .profiles .movie-profile-bg.no-movie {
+    max-height: 165px;
+  }
+}
