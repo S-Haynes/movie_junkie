@@ -7,14 +7,13 @@ import {
   CLEAR_MOVIE_ADDED
 } from "./types";
 import axios from "axios";
-import keys from "../../config/keys";
 
 export const getMovies = (searchTerm, page) => dispatch => {
   dispatch(clearMovieSearch());
   axios
     .get(
       "https://api.themoviedb.org/3/search/movie?" +
-        keys.API_KEY +
+        "api_key=f8bb5321b2ac567dcd6e70a2e065f9a9" +
         "&language=en-US&query=" +
         searchTerm +
         "&page=" +
@@ -39,7 +38,7 @@ export const getNextMovies = (searchTerm, page) => dispatch => {
   axios
     .get(
       "https://api.themoviedb.org/3/search/movie?" +
-        keys.API_KEY +
+        "api_key=f8bb5321b2ac567dcd6e70a2e065f9a9" +
         "&language=en-US&query=" +
         searchTerm +
         "&page=" +
@@ -84,7 +83,7 @@ export const getMovie = id => dispatch => {
       "https://api.themoviedb.org/3/movie/" +
         id +
         "?" +
-        keys.API_KEY +
+        "api_key=f8bb5321b2ac567dcd6e70a2e065f9a9" +
         "&append_to_response=credits"
     )
     .then(res => {
