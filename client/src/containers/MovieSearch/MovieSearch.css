@@ -1,13 +1,17 @@
-.MyTypist {
-  text-align: center;
-  margin-top: 20%;
-  font-size: 20px;
-  font-family: Questrial, sans-serif;
+.no-border {
+  border: 0 !important;
+  box-shadow: none;
+  outline: none;
 }
 
-.MyTypist .Typist1 {
-  color: rgb(181, 252, 247);
+.no-border:focus {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
-.MyTypist .Typist2 {
-  color: rgb(225, 176, 244);
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #111 !important;
+  opacity: 1; /* Firefox */
 }

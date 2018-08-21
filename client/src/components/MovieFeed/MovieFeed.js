@@ -5,7 +5,11 @@ import { Row } from "reactstrap";
 const MovieFeed = props => {
   const { movies } = props;
   const movieContent = movies.map(movie => (
-    <MovieItem key={movie.id + Math.random() * 10000} movie={movie} />
+    <MovieItem
+      key={movie.id + Math.random() * 10000}
+      movie={movie}
+      {...props}
+    />
   ));
   return <Row>{movieContent}</Row>;
 };

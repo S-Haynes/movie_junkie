@@ -27,20 +27,30 @@ class MovieItem extends Component {
     this.props.history.push("/movie/" + this.props.movie.id);
   };
   render() {
-    const { movie } = this.props;
+    const {
+      movie,
+      height,
+      width,
+      minwidth,
+      colLg,
+      colMd,
+      overlayOffset,
+      titleLength
+    } = this.props;
     const { hovering } = this.state;
     return (
-      <Col lg="3" md="6">
-        <Container
+      <Col lg={colLg} md={colMd}>
+        <div
           onMouseOver={e => this.onMouseOverHandler(e)}
           onMouseLeave={e => this.onMouseOutHandler(e)}
         >
           <Card
             className="ml-auto mr-auto mb-3"
             style={{
-              minHeight: "300px",
-              maxHeight: "300px",
-              maxWidth: "300px",
+              minHeight: height,
+              maxHeight: height,
+              maxWidth: width,
+              minWidth: minwidth,
               background: "#080808",
               color: "white",
               textAlign: "center",
@@ -51,7 +61,7 @@ class MovieItem extends Component {
               top
               width="100%"
               height="100%"
-              style={{ minHeight: "300px", maxHeight: "300px" }}
+              style={{ minHeight: height, maxHeight: height }}
               src={
                 movie.poster_path === "" ||
                 movie.poster_path === undefined ||
@@ -65,7 +75,7 @@ class MovieItem extends Component {
               <span
                 style={{
                   background: "rgba(0, 0, 0, 0.7)",
-                  height: "calc(100% + 10px)",
+                  height: "calc(100% + 2%)",
                   width: "100%",
                   position: "absolute",
                   top: "0",
@@ -77,18 +87,18 @@ class MovieItem extends Component {
                 <CardBody
                   style={{
                     position: "relative",
-                    bottom: "-100px"
+                    bottom: overlayOffset
                   }}
                 >
                   <CardTitle style={{ textAlign: "center" }}>
-                    {movie.title.slice(0, 30) + "..."}
+                    {movie.title.slice(0, titleLength) + "..."}
                   </CardTitle>
                   <CardSubtitle>{movie.release_date.slice(0, 4)}</CardSubtitle>
                 </CardBody>
               </span>
             ) : null}
           </Card>
-        </Container>
+        </div>
       </Col>
     );
   }

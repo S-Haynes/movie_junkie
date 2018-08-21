@@ -3,10 +3,16 @@ import {
   GET_MOVIE,
   CLEAR_MOVIE,
   CLEAR_MOVIES,
-  GET_NEXT_MOVIES
+  GET_NEXT_MOVIES,
+  SET_MOVIES_NOW,
+  SET_MOVIES_POPULAR,
+  SET_MOVIES_TOP
 } from "../actions/types";
 
 const initialState = {
+  moviesNow: [],
+  moviesTop: [],
+  moviesPopular: [],
   movies: [],
   searched: false,
   movie: {}
@@ -30,6 +36,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         movie: action.payload,
         searched: false
+      };
+    case SET_MOVIES_NOW:
+      return {
+        ...state,
+        moviesNow: action.payload
+      };
+    case SET_MOVIES_POPULAR:
+      return {
+        ...state,
+        moviesPopular: action.payload
+      };
+    case SET_MOVIES_TOP:
+      return {
+        ...state,
+        moviesTop: action.payload
       };
     case CLEAR_MOVIES:
       return {

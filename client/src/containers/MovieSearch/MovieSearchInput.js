@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import { Jumbotron, Container, Col, Input, Form, FormGroup } from "reactstrap";
 import { connect } from "react-redux";
-import { getMovies, getNextMovies } from "../../store/actions/movie";
+import {
+  getMovies,
+  getNextMovies,
+  getMoviesNow,
+  getMoviesTop,
+  getMoviesPopular
+} from "../../store/actions/movie";
 import setAuthToken from "../../utility/setAuthToken";
+import "./MovieSearch.css";
 
 class MovieSearchInput extends Component {
   state = {
@@ -10,6 +17,27 @@ class MovieSearchInput extends Component {
     page: 1,
     typingTimeout: null
   };
+
+  componentDidMount() {
+    this.props.getMoviesNow();
+    this.props.getMoviesTop();
+    this.props.getMoviesPopular();
+    setAuthToken(false);
+    window.onscroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.body.scrollHeight - 150
+      ) {
+        this.setState(prevState => {
+          return {
+            page: prevState.page + 1
+          };
+        });
+        console.log(document.body.scrollHeight);
+        this.props.getNextMovies(this.state.moviesearch, this.state.page);
+      }
+    };
+  }
 
   onSubmitHandler = e => {
     e.preventDefault();
@@ -36,26 +64,9 @@ class MovieSearchInput extends Component {
   onKeyDownHandler = e => {
     if (e.keyCode > 0) {
       this.setState({ page: 1 });
+      console.log(e.keyCode);
     }
   };
-
-  componentDidMount() {
-    setAuthToken(false);
-    window.onscroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.body.scrollHeight - 150
-      ) {
-        this.setState(prevState => {
-          return {
-            page: prevState.page + 1
-          };
-        });
-        console.log(document.body.scrollHeight);
-        this.props.getNextMovies(this.state.moviesearch, this.state.page);
-      }
-    };
-  }
 
   render() {
     const { moviesearch } = this.state;
@@ -71,6 +82,8 @@ class MovieSearchInput extends Component {
             <Form onSubmit={e => this.onSubmitHandler(e)}>
               <FormGroup>
                 <Input
+                  className="no-border"
+                  style={{ color: "#111", background: "#777" }}
                   value={moviesearch}
                   type="text"
                   name="moviesearch"
@@ -119,5 +132,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getMovies, getNextMovies }
+  { getMovies, getNextMovies, getMoviesNow, getMoviesTop, getMoviesPopular }
 )(MovieSearchInput);
