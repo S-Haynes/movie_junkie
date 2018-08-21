@@ -182,14 +182,14 @@ class Profile extends Component {
         );
       }
 
-      if (movielist.length >= 5) {
+      if (movielist.length >= 4) {
         settingsBucketlist.responsive.forEach(
           res => (res.settings.slidesToShow = 4)
         );
       } else {
         settingsBucketlist.slidesToShow = movielist.length;
         settingsBucketlist.responsive.forEach(
-          res => (res.settings.slidesToShow = movielist.length - 1)
+          res => (res.settings.slidesToShow = movielist.length)
         );
       }
 
@@ -199,12 +199,12 @@ class Profile extends Component {
 
       if (watchedlist.length >= 4) {
         settingsWatchedlist.responsive.forEach(
-          res => (res.settings.slidesToShow = 3)
+          res => (res.settings.slidesToShow = 4)
         );
       } else {
         settingsWatchedlist.slidesToShow = watchedlist.length;
         settingsWatchedlist.responsive.forEach(
-          res => (res.settings.slidesToShow = watchedlist.length - 1)
+          res => (res.settings.slidesToShow = watchedlist.length)
         );
       }
 
