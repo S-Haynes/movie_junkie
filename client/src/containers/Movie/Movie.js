@@ -95,7 +95,7 @@ class Movie extends Component {
       movieContent = <Spinner />;
     } else {
       movieContent = (
-        <div style={{ marginTop: "20px" }}>
+        <div className="single-movie-display" style={{ marginTop: "20px" }}>
           <div className="bg-overlay" />
           {movie.backdrop_path === null ? null : (
             <div
@@ -108,7 +108,13 @@ class Movie extends Component {
             />
           )}
           <Container style={{ padding: "0", marginBottom: "10px" }}>
-            <Link to="/search" className="btn btn-outline-dark btn-lg">
+            <Link
+              to="/search"
+              style={{
+                background: "rgba(17, 17, 17, 0.3"
+              }}
+              className="btn btn-dark btn-lg"
+            >
               {" "}
               Back to Search
             </Link>
@@ -116,7 +122,7 @@ class Movie extends Component {
           <Container
             style={{
               color: "white",
-              background: "rgba(17, 17, 17, 1)",
+              background: "rgba(17, 17, 17, 0.8)",
               padding: "50px",
               marginBottom: "50px",
               opacity: "0.95"

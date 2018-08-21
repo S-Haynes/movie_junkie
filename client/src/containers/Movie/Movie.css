@@ -25,3 +25,16 @@ li.list-group-item {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.single-movie-display .btn,
+.single-movie-display .btn:hover,
+.single-movie-display .btn:focus,
+.single-movie-display .btn:focus:active,
+.single-movie-display .btn:focus.active,
+.single-movie-display .btn.active,
+.single-movie-display .btn:active {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-color: none;
+}
