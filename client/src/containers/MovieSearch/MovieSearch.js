@@ -12,6 +12,7 @@ import "react-typist/dist/Typist.css";
 import "./MovieSearch.css";
 import setAuthToken from "../../utility/setAuthToken";
 import MovieSearchInput from "./MovieSearchInput";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class MovieSearch extends Component {
   state = {
@@ -108,6 +109,12 @@ class MovieSearch extends Component {
             movies={moviesNow.slice(randomNumNow, 16 + randomNumNow)}
           />
         </Col>
+      );
+    } else if (movies && movies.length === 0 && searched) {
+      movieContent = (
+        <Container className="pt-4">
+          <Spinner />
+        </Container>
       );
     }
 

@@ -9,6 +9,7 @@ export const GET_NEXT_MOVIES = "GET_NEXT_MOVIES";
 export const SET_MOVIES_NOW = "SET_MOVIES_NOW";
 export const SET_MOVIES_POPULAR = "SET_MOVIES_POPULAR";
 export const SET_MOVIES_TOP = "SET_MOVIES_TOP";
+export const SET_SEARCHED = "SET_SEARCHED";
 
 export const GET_PROFILES = "GET_PROFILES";
 export const GET_PROFILE = "GET_PROFILE";

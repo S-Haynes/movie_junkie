@@ -6,7 +6,8 @@ import {
   GET_NEXT_MOVIES,
   SET_MOVIES_NOW,
   SET_MOVIES_POPULAR,
-  SET_MOVIES_TOP
+  SET_MOVIES_TOP,
+  SET_SEARCHED
 } from "../actions/types";
 
 const initialState = {
@@ -62,6 +63,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         movie: {}
+      };
+    case SET_SEARCHED:
+      return {
+        ...state,
+        searched: true
       };
     default:
       return state;

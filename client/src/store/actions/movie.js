@@ -7,7 +7,8 @@ import {
   CLEAR_MOVIE_ADDED,
   SET_MOVIES_NOW,
   SET_MOVIES_POPULAR,
-  SET_MOVIES_TOP
+  SET_MOVIES_TOP,
+  SET_SEARCHED
 } from "./types";
 import axios from "axios";
 
@@ -178,6 +179,12 @@ export const setMovie = movie => {
 export const clearMovieSearch = () => {
   return {
     type: CLEAR_MOVIES
+  };
+};
+
+export const setSearched = () => {
+  return {
+    type: SET_SEARCHED
   };
 };
 

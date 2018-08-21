@@ -31,12 +31,12 @@ class NavigationBar extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const guestLinks = (
       <Nav navbar>
-        <NavItem className="ml-4">
+        <NavItem className="ml-2">
           <NavLink tag={Link} to="/profiles">
-            Meet the Junkies
+            Members
           </NavLink>
         </NavItem>
-        <NavItem>
+        <NavItem className="ml-2">
           <NavLink tag={Link} to="/search">
             Search
           </NavLink>
@@ -58,7 +58,7 @@ class NavigationBar extends Component {
       <Nav navbar>
         <NavItem className="ml-4">
           <NavLink tag={Link} to="/profiles">
-            Meet the Junkies
+            Members
           </NavLink>
         </NavItem>
         <NavItem>

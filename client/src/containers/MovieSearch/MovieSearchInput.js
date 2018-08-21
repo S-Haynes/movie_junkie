@@ -6,7 +6,8 @@ import {
   getNextMovies,
   getMoviesNow,
   getMoviesTop,
-  getMoviesPopular
+  getMoviesPopular,
+  setSearched
 } from "../../store/actions/movie";
 import setAuthToken from "../../utility/setAuthToken";
 import "./MovieSearch.css";
@@ -53,19 +54,18 @@ class MovieSearchInput extends Component {
     if (this.state.typingTimeout) {
       clearTimeout(this.state.typingTimeout);
     }
-
+    this.props.setSearched();
     this.setState({
       [e.target.name]: e.target.value,
       typingTimeout: setTimeout(() => {
         this.getData(this.state.moviesearch, this.state.page);
-      }, 450)
+      }, 350)
     });
   };
 
   onKeyDownHandler = e => {
     if (e.keyCode > 0) {
       this.setState({ page: 1 });
-      console.log(e.keyCode);
     }
   };
 
@@ -100,28 +100,17 @@ class MovieSearchInput extends Component {
           className="text-left"
           style={{
             position: "absolute",
-            zIndex: "-2",
-            top: "400px",
+            zIndex: "-3",
+            top: "50%",
             left: "5%",
-            fontSize: "300px",
+            fontSize: "200px",
             opacity: "0.03",
             color: "#ccc",
             height: "400px",
             width: "95%",
             overflow: "hidden"
           }}
-        >
-          <h1 style={{ margin: "0", fontSize: "inherit", zIndex: "-2" }}>
-            {this.state.moviesearch}
-          </h1>
-          <hr
-            style={{
-              width: "30%",
-              border: "1px solid rgba(255, 0, 0, 1)",
-              margin: "auto"
-            }}
-          />
-        </div>
+        />
       </Container>
     );
   }
@@ -133,5 +122,12 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getMovies, getNextMovies, getMoviesNow, getMoviesTop, getMoviesPopular }
+  {
+    getMovies,
+    getNextMovies,
+    getMoviesNow,
+    getMoviesTop,
+    getMoviesPopular,
+    setSearched
+  }
 )(MovieSearchInput);
