@@ -73,8 +73,8 @@ class MovieSearch extends Component {
           </Container>
 
           <MovieFeed
-            titleLength={30}
-            overlayOffset="-100px"
+            titleLength={20}
+            overlayOffset="0px"
             colLg="3"
             colMd="6"
             height="250px"
