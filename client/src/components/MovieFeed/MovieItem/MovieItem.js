@@ -53,7 +53,7 @@ class MovieItem extends Component {
               height="100%"
               style={{ minHeight: "300px", maxHeight: "300px" }}
               src={
-                movie.poster_path === "N/A" ||
+                movie.poster_path === "" ||
                 movie.poster_path === undefined ||
                 movie.poster_path === null
                   ? ImageNotFound

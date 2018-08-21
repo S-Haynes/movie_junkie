@@ -26,6 +26,8 @@ const BackgroundOverlay = props => {
           width: "100%",
           height: "100%",
           backgroundImage: `url(${props.url})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
           zIndex: "-2"
         }}
       />

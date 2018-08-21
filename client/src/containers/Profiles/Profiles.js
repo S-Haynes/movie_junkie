@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getProfiles } from "../../store/actions/profile";
 
 import ProfileFeed from "./ProfilesFeed/ProfileFeed";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Profiles extends Component {
   componentDidMount() {
@@ -10,12 +11,20 @@ class Profiles extends Component {
   }
 
   render() {
-    const { profiles } = this.props.profile;
-    return (
-      <div>
-        <ProfileFeed profiles={profiles} />
-      </div>
-    );
+    const { profiles, loading } = this.props.profile;
+
+    let profilesContent;
+
+    if (loading) {
+      profilesContent = <Spinner />;
+    } else {
+      profilesContent = (
+        <div>
+          <ProfileFeed profiles={profiles} />
+        </div>
+      );
+    }
+    return profilesContent;
   }
 }
 

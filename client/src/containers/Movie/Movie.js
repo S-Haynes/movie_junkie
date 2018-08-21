@@ -18,6 +18,7 @@ import { getMovie, clearMovie } from "../../store/actions/movie";
 import { addToBucketList, addToWatchedList } from "../../store/actions/profile";
 import setAuthToken from "../../utility/setAuthToken";
 import ImageNotFound from "../../assets/img/image-not-found.png";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Movie extends Component {
   state = {
@@ -91,7 +92,7 @@ class Movie extends Component {
     let movieContent;
 
     if (Object.keys(movie).length === 0) {
-      movieContent = <h4> Loading... </h4>;
+      movieContent = <Spinner />;
     } else {
       movieContent = (
         <div style={{ marginTop: "20px" }}>
@@ -145,7 +146,7 @@ class Movie extends Component {
                   {movie.title}
                   {movie.release_date === null ||
                   movie.release_date === "" ? null : (
-                    <span>({movie.release_date.slice(0, 4)})</span>
+                    <span> ({movie.release_date.slice(0, 4)})</span>
                   )}
                 </h2>
                 <Jumbotron style={{ background: "#232323" }}>
@@ -210,6 +211,7 @@ class Movie extends Component {
                 <Row className="mb-4 d-flex justify-content-center">
                   {movie.credits.cast.slice(0, 5).map(actor => (
                     <Col
+                      key={actor._id}
                       className="mb-4 mr-4 d-flex justify-content-center"
                       lg="2"
                       md="4"

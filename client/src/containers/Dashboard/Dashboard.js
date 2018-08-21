@@ -9,6 +9,7 @@ import {
 import { Container, Col, Row, Jumbotron } from "reactstrap";
 import BucketListFeed from "../../components/BucketListFeed/BucketListFeed";
 import WatchedListFeed from "../../components/WatchedListFeed/WatchedListFeed";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import "./Dashboard.css";
 
 class Dashboard extends Component {
@@ -32,7 +33,7 @@ class Dashboard extends Component {
     let profileContent;
 
     if (loading || Object.keys(profile).length === 0) {
-      profileContent = <h3>Loading...</h3>;
+      profileContent = <Spinner />;
     } else {
       profileContent = (
         <div style={{ marginTop: "50px" }}>

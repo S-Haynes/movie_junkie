@@ -82,6 +82,32 @@ class MovieSearchInput extends Component {
             </Form>
           </Col>
         </Jumbotron>
+        <div
+          className="text-left"
+          style={{
+            position: "absolute",
+            zIndex: "-2",
+            top: "400px",
+            left: "5%",
+            fontSize: "300px",
+            opacity: "0.03",
+            color: "#ccc",
+            height: "400px",
+            width: "95%",
+            overflow: "hidden"
+          }}
+        >
+          <h1 style={{ margin: "0", fontSize: "inherit", zIndex: "-2" }}>
+            {this.state.moviesearch}
+          </h1>
+          <hr
+            style={{
+              width: "30%",
+              border: "1px solid rgba(255, 0, 0, 1)",
+              margin: "auto"
+            }}
+          />
+        </div>
       </Container>
     );
   }

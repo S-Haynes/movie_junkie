@@ -11,7 +11,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./NavigationBar.css";
-
 import { logoutUser } from "../../store/actions/auth";
 
 class NavigationBar extends Component {
@@ -31,8 +30,18 @@ class NavigationBar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const guestLinks = (
-      <Nav className="ml-auto" navbar>
+      <Nav navbar>
+        <NavItem className="ml-4">
+          <NavLink tag={Link} to="/profiles">
+            Meet the Junkies
+          </NavLink>
+        </NavItem>
         <NavItem>
+          <NavLink tag={Link} to="/search">
+            Search
+          </NavLink>
+        </NavItem>
+        <NavItem className="ml-auto login-nav">
           <NavLink tag={Link} to="/login">
             Login
           </NavLink>
@@ -46,8 +55,18 @@ class NavigationBar extends Component {
     );
 
     const authLinks = (
-      <Nav className="ml-auto" navbar>
+      <Nav navbar>
+        <NavItem className="ml-4">
+          <NavLink tag={Link} to="/profiles">
+            Meet the Junkies
+          </NavLink>
+        </NavItem>
         <NavItem>
+          <NavLink tag={Link} to="/search">
+            Search
+          </NavLink>
+        </NavItem>
+        <NavItem className="login-nav ml-auto">
           <NavLink tag={Link} to={"/profile/" + user.displayname}>
             Profile
           </NavLink>
@@ -76,13 +95,6 @@ class NavigationBar extends Component {
           <NavbarBrand tag={Link} to="/">
             MovieJunkie
           </NavbarBrand>
-          <Nav navbar>
-            <NavItem>
-              <NavLink tag={Link} to="/profiles">
-                Meet the Junkies
-              </NavLink>
-            </NavItem>
-          </Nav>
           <NavbarToggler onClick={this.toggleHandler} />
           <Collapse isOpen={this.state.isOpen} navbar>
             {isAuthenticated ? authLinks : guestLinks}

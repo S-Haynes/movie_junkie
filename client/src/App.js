@@ -61,7 +61,13 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/profiles" component={Profiles} />
-                <Route exact path="/profile/:displayname" component={Profile} />
+                <Route
+                  exact
+                  path="/profile/:displayname"
+                  render={props => (
+                    <Profile key={props.match.params.displayname} {...props} />
+                  )}
+                />
               </Switch>
             </div>
           </Layout>
