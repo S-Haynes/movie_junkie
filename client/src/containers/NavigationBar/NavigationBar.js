@@ -56,7 +56,7 @@ class NavigationBar extends Component {
 
     const authLinks = (
       <Nav navbar>
-        <NavItem className="ml-4">
+        <NavItem className="link-nav ml-4">
           <NavLink tag={Link} to="/profiles">
             Members
           </NavLink>
