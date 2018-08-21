@@ -10,19 +10,14 @@ import {
   SET_MOVIES_TOP
 } from "./types";
 import axios from "axios";
-import keys from "../../config/keys";
 
 export const getMovies = (searchTerm, page) => dispatch => {
   dispatch(clearMovieSearch());
   axios
     .get(
-      "https://api.themoviedb.org/3/search/movie?" +
-        keys.API_KEY +
-        "&language=en-US&query=" +
-        searchTerm +
-        "&page=" +
-        page +
-        "&include_adult=false"
+      `https://api.themoviedb.org/3/search/movie?${
+        process.env.REACT_APP_API_KEY
+      }&language=en-US&query=${searchTerm}&page=${page}&include_adult=false`
     )
     .then(res => {
       if (
@@ -41,13 +36,9 @@ export const getMovies = (searchTerm, page) => dispatch => {
 export const getNextMovies = (searchTerm, page) => dispatch => {
   axios
     .get(
-      "https://api.themoviedb.org/3/search/movie?" +
-        keys.API_KEY +
-        "&language=en-US&query=" +
-        searchTerm +
-        "&page=" +
-        page +
-        "&include_adult=false"
+      `https://api.themoviedb.org/3/search/movie?${
+        process.env.REACT_APP_API_KEY
+      }&language=en-US&query=${searchTerm}&page=${page}&include_adult=false`
     )
     .then(res => {
       if (
@@ -66,9 +57,9 @@ export const getNextMovies = (searchTerm, page) => dispatch => {
 export const getMoviesNow = () => dispatch => {
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/now_playing?" +
-        keys.API_KEY +
-        "&language=en-US&page=1"
+      `https://api.themoviedb.org/3/movie/now_playing?${
+        process.env.REACT_APP_API_KEY
+      }&language=en-US&page=1`
     )
     .then(res => {
       if (
@@ -86,9 +77,9 @@ export const getMoviesNow = () => dispatch => {
 export const getMoviesTop = () => dispatch => {
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/top_rated?" +
-        keys.API_KEY +
-        "&language=en-US&page=1"
+      `https://api.themoviedb.org/3/movie/top_rated?${
+        process.env.REACT_APP_API_KEY
+      }&language=en-US&page=1`
     )
     .then(res => {
       if (
@@ -105,9 +96,9 @@ export const getMoviesTop = () => dispatch => {
 export const getMoviesPopular = () => dispatch => {
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/popular?" +
-        keys.API_KEY +
-        "&language=en-US&page=1"
+      `https://api.themoviedb.org/3/movie/popular?${
+        process.env.REACT_APP_API_KEY
+      }&language=en-US&page=1`
     )
     .then(res => {
       if (
@@ -165,11 +156,9 @@ export const getMovie = id => dispatch => {
   });
   axios
     .get(
-      "https://api.themoviedb.org/3/movie/" +
-        id +
-        "?" +
-        keys.API_KEY +
-        "&append_to_response=credits"
+      `https://api.themoviedb.org/3/movie/${id}?${
+        process.env.REACT_APP_API_KEY
+      }&append_to_response=credits`
     )
     .then(res => {
       dispatch(setMovie(res.data));

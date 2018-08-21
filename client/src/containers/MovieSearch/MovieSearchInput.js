@@ -19,6 +19,7 @@ class MovieSearchInput extends Component {
   };
 
   componentDidMount() {
+    console.log(process.env);
     this.props.getMoviesNow();
     this.props.getMoviesTop();
     this.props.getMoviesPopular();

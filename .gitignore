@@ -1,5 +1,4 @@
 node_modules
 /config/keys_dev.js
-/src/.env
-/src/config/keys_dev.js
-.env
+client/src/config/keys_dev.js
+client/.env
