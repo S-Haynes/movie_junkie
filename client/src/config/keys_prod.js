@@ -1,5 +1,5 @@
 const keys = {
-  API_KEY: REACT_APP_API_KEY
+  API_KEY: process.env.API_KEY
 };
 
 module.exports = keys;
