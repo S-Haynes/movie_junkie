@@ -31,17 +31,17 @@ class NavigationBar extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const guestLinks = (
       <Nav navbar>
-        <NavItem className="ml-2">
+        <NavItem className="ml-2 link-nav">
           <NavLink tag={Link} to="/profiles">
             Members
           </NavLink>
         </NavItem>
-        <NavItem className="ml-2">
+        <NavItem className="ml-2 link-nav">
           <NavLink tag={Link} to="/search">
             Search
           </NavLink>
         </NavItem>
-        <NavItem className="ml-auto login-nav">
+        <NavItem className="ml-auto link-nav">
           <NavLink tag={Link} to="/login">
             Login
           </NavLink>
@@ -66,7 +66,7 @@ class NavigationBar extends Component {
             Search
           </NavLink>
         </NavItem>
-        <NavItem className="login-nav ml-auto">
+        <NavItem className="link-nav ml-auto">
           <NavLink tag={Link} to={"/profile/" + user.displayname}>
             Profile
           </NavLink>

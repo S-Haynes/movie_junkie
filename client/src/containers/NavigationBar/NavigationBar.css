@@ -7,7 +7,7 @@ ul.navbar-nav {
 }
 
 @media (max-width: 767px) {
-  div li.login-nav {
+  div li.link-nav {
     margin-left: 0 !important;
   }
 }

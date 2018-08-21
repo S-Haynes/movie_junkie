@@ -90,6 +90,7 @@ class MovieSearch extends Component {
             <p>
               In theatres{" "}
               <span
+                className="blink"
                 style={{
                   color: "red"
                 }}
@@ -138,8 +139,9 @@ class MovieSearch extends Component {
                       <h4>Top Rated</h4>
                       <hr
                         style={{
-                          border: "1px solid #999",
-                          width: "15%",
+                          marginTop: "-2px",
+                          border: "1px solid rgba(255, 0, 0, 0.7)",
+                          width: "5%",
                           opacity: "0.5"
                         }}
                       />
@@ -165,8 +167,9 @@ class MovieSearch extends Component {
                       <h4>Popular</h4>
                       <hr
                         style={{
-                          border: "1px solid #999",
-                          width: "15%",
+                          marginTop: "-2px",
+                          border: "1px solid rgba(255, 0, 0, 0.7)",
+                          width: "5%",
                           opacity: "0.5"
                         }}
                       />
