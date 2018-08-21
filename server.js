@@ -27,10 +27,6 @@ mongoose
   .then(res => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-  res.send("HELLO THERE SERVER IS UP");
-});
-
 // use routes
 
 app.use("/api/profile", profileRoutes);
