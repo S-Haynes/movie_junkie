@@ -124,8 +124,7 @@ class Movie extends Component {
               color: "white",
               background: "rgba(17, 17, 17, 0.8)",
               padding: "50px",
-              marginBottom: "50px",
-              opacity: "0.95"
+              marginBottom: "50px"
             }}
           >
             <Row>

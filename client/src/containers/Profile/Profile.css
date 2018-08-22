@@ -1,4 +1,5 @@
 .profile .card-img {
   max-height: 250px;
   min-height: 150px;
+  height: 50vw;
 }
