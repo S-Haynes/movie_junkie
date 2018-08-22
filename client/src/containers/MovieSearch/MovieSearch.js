@@ -113,9 +113,11 @@ class MovieSearch extends Component {
       );
     } else if (movies && movies.length === 0 && searched) {
       movieContent = (
-        <Container className="pt-4">
-          <Spinner />
-        </Container>
+        <Col md="8">
+          <Container className="pt-4">
+            <Spinner />
+          </Container>
+        </Col>
       );
     }
 
