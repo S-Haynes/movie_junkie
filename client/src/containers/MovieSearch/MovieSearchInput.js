@@ -27,8 +27,9 @@ class MovieSearchInput extends Component {
     setAuthToken(false);
     window.onscroll = () => {
       if (
+        this.props.movie.searched &&
         window.innerHeight + document.documentElement.scrollTop >=
-        document.body.scrollHeight - 150
+          document.body.scrollHeight - 150
       ) {
         this.setState(prevState => {
           return {
