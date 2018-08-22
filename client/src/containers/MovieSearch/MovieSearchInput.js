@@ -7,7 +7,8 @@ import {
   getMoviesNow,
   getMoviesTop,
   getMoviesPopular,
-  setSearched
+  setSearched,
+  clearMovieSearch
 } from "../../store/actions/movie";
 import setAuthToken from "../../utility/setAuthToken";
 import "./MovieSearch.css";
@@ -54,11 +55,18 @@ class MovieSearchInput extends Component {
       clearTimeout(this.state.typingTimeout);
     }
     this.props.setSearched();
-    this.setState({
-      [e.target.name]: e.target.value,
-      typingTimeout: setTimeout(() => {
-        this.getData(this.state.moviesearch, this.state.page);
-      }, 350)
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      if (this.props.movie.searched && this.state.moviesearch.length > 0) {
+        this.setState({
+          typingTimeout: setTimeout(() => {
+            this.getData(this.state.moviesearch, this.state.page);
+          }, 350)
+        });
+      }
+
+      if (this.state.moviesearch.length === 0) {
+        this.props.clearMovieSearch();
+      }
     });
   };
 
@@ -127,6 +135,7 @@ export default connect(
     getMoviesNow,
     getMoviesTop,
     getMoviesPopular,
-    setSearched
+    setSearched,
+    clearMovieSearch
   }
 )(MovieSearchInput);
