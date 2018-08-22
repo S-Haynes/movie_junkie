@@ -13,7 +13,8 @@ import ImageNotFound from "../../../assets/img/image-not-found.png";
 
 class MovieItem extends Component {
   state = {
-    hovering: false
+    hovering: false,
+    secret: true
   };
 
   onMouseOverHandler = e => {
