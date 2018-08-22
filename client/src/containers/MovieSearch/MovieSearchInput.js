@@ -20,7 +20,6 @@ class MovieSearchInput extends Component {
   };
 
   componentDidMount() {
-    console.log(process.env);
     this.props.getMoviesNow();
     this.props.getMoviesTop();
     this.props.getMoviesPopular();
@@ -36,7 +35,6 @@ class MovieSearchInput extends Component {
             page: prevState.page + 1
           };
         });
-        console.log(document.body.scrollHeight);
         this.props.getNextMovies(this.state.moviesearch, this.state.page);
       }
     };
