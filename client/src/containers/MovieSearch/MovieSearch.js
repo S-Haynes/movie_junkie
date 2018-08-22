@@ -7,7 +7,6 @@ import {
 } from "../../store/actions/movie";
 import { Container, Row, Col, Jumbotron } from "reactstrap";
 import MovieFeed from "../../components/MovieFeed/MovieFeed";
-import Typist from "react-typist";
 import "react-typist/dist/Typist.css";
 import "./MovieSearch.css";
 import setAuthToken from "../../utility/setAuthToken";
@@ -55,7 +54,6 @@ class MovieSearch extends Component {
     const {
       movies,
       searched,
-      popularMovies,
       moviesNow,
       moviesTop,
       moviesPopular,

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProfileByDisplayName } from "../../store/actions/profile";
 import { Container, Col, Row, CardImg } from "reactstrap";
-import { withRouter } from "react-router-dom";
 import ImageNotFound from "../../assets/img/image-not-found.png";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Slider from "react-slick";
