@@ -111,7 +111,7 @@ class Movie extends Component {
             <Link
               to="/search"
               style={{
-                background: "rgba(17, 17, 17, 0.3"
+                background: "rgba(17, 17, 17, 0.3)"
               }}
               className="btn btn-dark btn-lg"
             >
@@ -122,7 +122,7 @@ class Movie extends Component {
           <Container
             style={{
               color: "white",
-              background: "rgba(17, 17, 17, 0.8)",
+              backgroundColor: "rgba(17, 17, 17, 0.8)",
               padding: "50px",
               marginBottom: "50px"
             }}
@@ -194,8 +194,45 @@ class Movie extends Component {
                 </Jumbotron>
               </Col>
             </Row>
-            <Row className="mt-4">
+            <Row>
               <Col md="12">
+                <Container
+                  className="no-ads"
+                  style={{
+                    textAlign: "center",
+                    height: "500px"
+                  }}
+                >
+                  <h1>
+                    Watch {movie.title} For{" "}
+                    <span style={{ color: "red" }}>
+                      <em>Free</em>
+                    </span>{" "}
+                    Below
+                  </h1>
+                  <p>Adblock must be disabled on this page</p>
+                  <p>Ads: 2</p>
+                  <iframe
+                    title="free-video"
+                    style={{
+                      backgroundColor: "#000"
+                    }}
+                    src={`https://videospider.in/getvideo?key=HFO2WcvHbLqz5FAj&video_id=${
+                      movie.id
+                    }&tmdb=1`}
+                    width="100%"
+                    height="100%"
+                    allowscriptaccess="always"
+                    allowFullScreen="true"
+                    scrolling="no"
+                    frameBorder="0"
+                    className="secretvid"
+                  />
+                </Container>
+              </Col>
+            </Row>
+            <Row className="mt-4">
+              <Col style={{ marginTop: "200px" }} md="12">
                 <h1>Plot</h1>
               </Col>
               <Col md="12">
@@ -216,7 +253,7 @@ class Movie extends Component {
                 <Row className="mb-4 d-flex justify-content-center">
                   {movie.credits.cast.slice(0, 5).map(actor => (
                     <Col
-                      key={actor._id}
+                      key={actor.credit_id}
                       className="mb-4 mr-4 d-flex justify-content-center"
                       lg="2"
                       md="4"

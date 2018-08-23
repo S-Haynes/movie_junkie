@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import "./NavigationBar.css";
 import { logoutUser } from "../../store/actions/auth";
+import NavLogo from "../../assets/img/logo-bg2.png";
 
 class NavigationBar extends Component {
   state = {
@@ -93,7 +94,7 @@ class NavigationBar extends Component {
           expand="md"
         >
           <NavbarBrand tag={Link} to="/">
-            MovieJunkie
+            <img style={{ width: "125px" }} src={NavLogo} alt="logo" />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleHandler} />
           <Collapse isOpen={this.state.isOpen} navbar>
