@@ -12,8 +12,7 @@ import ImageNotFound from "../../../assets/img/image-not-found.png";
 
 class MovieItem extends Component {
   state = {
-    hovering: false,
-    secret: true
+    hovering: false
   };
 
   onMouseOverHandler = e => {
@@ -31,15 +30,20 @@ class MovieItem extends Component {
       movie,
       height,
       width,
-      minwidth,
+      minWidth,
+      maxWidth,
+      minHeight,
+      maxHeight,
       colLg,
       colMd,
+      colSm,
+      col,
       overlayOffset,
       titleLength
     } = this.props;
     const { hovering } = this.state;
     return (
-      <Col lg={colLg} md={colMd}>
+      <Col lg={colLg} md={colMd} sm={colSm} xs={col}>
         <div
           onMouseOver={e => this.onMouseOverHandler(e)}
           onMouseLeave={e => this.onMouseOutHandler(e)}
@@ -47,10 +51,10 @@ class MovieItem extends Component {
           <Card
             className="ml-auto mr-auto mb-3"
             style={{
-              minHeight: height,
-              maxHeight: height,
-              maxWidth: width,
-              minWidth: minwidth,
+              minHeight: minHeight,
+              maxHeight: maxHeight,
+              maxWidth: maxWidth,
+              minWidth: minWidth,
               background: "#080808",
               color: "white",
               textAlign: "center",
@@ -61,7 +65,10 @@ class MovieItem extends Component {
               top
               width="100%"
               height="100%"
-              style={{ minHeight: height, maxHeight: height }}
+              style={{
+                minHeight: minHeight,
+                maxHeight: maxHeight
+              }}
               src={
                 movie.poster_path === "" ||
                 movie.poster_path === undefined ||
@@ -80,7 +87,8 @@ class MovieItem extends Component {
                   position: "absolute",
                   top: "0",
                   left: "0",
-                  cursor: "pointer"
+                  cursor: "pointer",
+                  overflow: "hidden"
                 }}
                 onClick={e => this.onClickHandler(e)}
               >

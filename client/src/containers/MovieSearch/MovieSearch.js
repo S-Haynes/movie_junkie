@@ -74,16 +74,19 @@ class MovieSearch extends Component {
             titleLength={20}
             overlayOffset="-100px"
             colLg="3"
-            colMd="6"
-            height="250px"
-            width="250px"
+            colMd="4"
+            colSm="6"
+            minHeight="250px"
+            maxHeight="250px"
+            minWidth="150px"
+            maxWidth="300px"
             movies={movies}
           />
         </Col>
       );
     } else if (!searched && moviesNow.length > 0) {
       movieContent = (
-        <Col md="8">
+        <Col style={{ maxWidth: "800px" }} md="8">
           <Container>
             <p>
               In theatres{" "}
@@ -102,9 +105,12 @@ class MovieSearch extends Component {
             titleLength={30}
             overlayOffset="-100px"
             colLg="3"
-            colMd="6"
-            height="250px"
-            width="250px"
+            colMd="4"
+            colSm="6"
+            minHeight="250px"
+            maxHeight="250px"
+            minWidth="150px"
+            maxWidth="280px"
             movies={moviesNow.slice(randomNumNow, 16 + randomNumNow)}
           />
         </Col>
@@ -121,12 +127,15 @@ class MovieSearch extends Component {
 
     return (
       <div>
-        <Container style={{ marginTop: "50px", maxWidth: "90%" }}>
+        <Container
+          className="mx-auto"
+          style={{ marginTop: "50px", maxWidth: "1200px" }}
+        >
           <MovieSearchInput />
           <div className="movie-content-body">
             <Row>
               {movieContent}
-              <Col className="ml-auto" md="4">
+              <Col md="4">
                 <Row>
                   <Col xs="12">
                     <Jumbotron
@@ -147,8 +156,8 @@ class MovieSearch extends Component {
                       />
                       <MovieFeed
                         titleLength={10}
-                        colLg="4"
-                        colMd="6"
+                        colSm="4"
+                        col="6"
                         width="150px"
                         height="150px"
                         minwidth="60px"
@@ -175,8 +184,8 @@ class MovieSearch extends Component {
                       />
                       <MovieFeed
                         titleLength={10}
-                        colLg="4"
-                        colMd="6"
+                        colSm="4"
+                        col="6"
                         width="150px"
                         height="150px"
                         minwidth="60px"
