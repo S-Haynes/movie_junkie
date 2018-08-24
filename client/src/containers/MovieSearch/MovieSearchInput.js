@@ -42,6 +42,10 @@ class MovieSearchInput extends Component {
     };
   }
 
+  componentWillUnmount() {
+    this.props.setSearchedFalse();
+  }
+
   onSubmitHandler = e => {
     e.preventDefault();
     this.getData(this.state.moviesearch, this.state.page);
