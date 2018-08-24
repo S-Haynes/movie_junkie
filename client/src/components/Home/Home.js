@@ -1,10 +1,16 @@
 import React from "react";
 import JunkieLogo from "../Logo/YouAJunkie";
+import InfoControls from "../../containers/InfoControls/InfoControls";
 
 const Home = props => {
   return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <JunkieLogo />
+    <div>
+      <div style={{ width: "100%", height: "70vh", position: "relative" }}>
+        <JunkieLogo />
+      </div>
+      <div className="mt-4">
+        <InfoControls />
+      </div>
     </div>
   );
 };

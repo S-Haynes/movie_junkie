@@ -5,13 +5,15 @@
 .title-page .btn.active:focus,
 .title-page .btn:active:focus,
 .title-page .btn.active.focus {
-  background: rgba(196, 81, 250, 0.1) !important;
+  background: rgba(255, 0, 0, 1) !important;
   box-shadow: none;
 }
 
 .title-page .btn-outline-primary {
-  color: rgb(196, 81, 250) !important;
-  border-color: #c451fa !important;
+  color: rgb(255, 255, 255) !important;
+  border-radius: 0%;
+  border-color: rgba(150, 0, 0, 1) !important;
+  background: rgba(150, 0, 0, 1) !important;
 }
 
 @media (min-width: 0px) {
