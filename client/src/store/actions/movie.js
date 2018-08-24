@@ -8,7 +8,8 @@ import {
   SET_MOVIES_NOW,
   SET_MOVIES_POPULAR,
   SET_MOVIES_TOP,
-  SET_SEARCHED
+  SET_SEARCHED,
+  SET_SEARCHED_FALSE
 } from "./types";
 import axios from "axios";
 
@@ -26,6 +27,8 @@ export const getMovies = (searchTerm, page) => dispatch => {
         res.data.results === null ||
         res.data.results.length === 0
       ) {
+        dispatch(setSearched());
+        dispatch(setMovies({}));
         return;
       }
       dispatch(setMovies(res.data.results));
@@ -185,6 +188,11 @@ export const clearMovieSearch = () => {
 export const setSearched = () => {
   return {
     type: SET_SEARCHED
+  };
+};
+export const setSearchedFalse = () => {
+  return {
+    type: SET_SEARCHED_FALSE
   };
 };
 

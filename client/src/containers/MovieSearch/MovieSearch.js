@@ -85,7 +85,7 @@ class MovieSearch extends Component {
           />
         </Col>
       );
-    } else if (!searched && moviesNow.length > 0) {
+    } else if (movies.length === 0 && !searched && moviesNow.length > 0) {
       movieContent = (
         <Col style={{ maxWidth: "800px" }} md="8">
           <Container>
@@ -122,6 +122,14 @@ class MovieSearch extends Component {
         <Col md="8">
           <Container className="pt-4">
             <Spinner />
+          </Container>
+        </Col>
+      );
+    } else {
+      movieContent = (
+        <Col md="8">
+          <Container className="pt-4">
+            <h1>No Movies found by that name, keep searching...</h1>
           </Container>
         </Col>
       );

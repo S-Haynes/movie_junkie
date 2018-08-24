@@ -8,7 +8,8 @@ import {
   getMoviesTop,
   getMoviesPopular,
   setSearched,
-  clearMovieSearch
+  clearMovieSearch,
+  setSearchedFalse
 } from "../../store/actions/movie";
 import setAuthToken from "../../utility/setAuthToken";
 import "./MovieSearch.css";
@@ -66,12 +67,13 @@ class MovieSearchInput extends Component {
 
       if (this.state.moviesearch.length === 0) {
         this.props.clearMovieSearch();
+        this.props.setSearchedFalse();
       }
     });
   };
 
   onKeyDownHandler = e => {
-    if (e.keyCode > 0) {
+    if (e.keyCode) {
       this.setState({ page: 1 });
     }
   };
@@ -136,6 +138,7 @@ export default connect(
     getMoviesTop,
     getMoviesPopular,
     setSearched,
-    clearMovieSearch
+    clearMovieSearch,
+    setSearchedFalse
   }
 )(MovieSearchInput);
