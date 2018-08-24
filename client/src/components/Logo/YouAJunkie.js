@@ -1,6 +1,5 @@
 import React from "react";
 import JunkieLogo from "../../assets/img/title-junkie.png";
-import JunkieGif from "../../assets/img/junkie.gif";
 import { Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import MovieBg from "../../assets/img/movie-collage-bg.jpg";
