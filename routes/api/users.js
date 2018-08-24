@@ -10,10 +10,6 @@ const passport = require("passport");
 const User = require("../../models/user");
 const Profile = require("../../models/profile");
 
-router.get("/", (req, res) => {
-  res.send("User routing works");
-});
-
 // POST - Register a new user
 router.post("/register", (req, res) => {
   const errors = {};
