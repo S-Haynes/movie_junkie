@@ -9,7 +9,7 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./NavigationBar.css";
 import { logoutUser } from "../../store/actions/auth";
 import NavLogo from "../../assets/img/logo-bg2.png";
@@ -26,6 +26,7 @@ class NavigationBar extends Component {
   logoutHandler = e => {
     e.preventDefault();
     this.props.logoutUser();
+    this.props.history.push("/login");
   };
 
   render() {
@@ -110,7 +111,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(NavigationBar);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { logoutUser }
+  )(NavigationBar)
+);
