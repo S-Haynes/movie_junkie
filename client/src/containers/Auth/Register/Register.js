@@ -59,6 +59,11 @@ class Register extends Component {
                     placeholder="Username"
                     onChange={e => this.onChangeHandler(e)}
                   />
+                  {this.props.error.username ? (
+                    <p style={{ color: "red", marginTop: "5px" }}>
+                      {this.props.error.username}
+                    </p>
+                  ) : null}
                 </FormGroup>
                 <FormGroup>
                   <Label for="password">Password</Label>
@@ -70,6 +75,11 @@ class Register extends Component {
                     placeholder="Password"
                     onChange={e => this.onChangeHandler(e)}
                   />
+                  {this.props.error.password ? (
+                    <p style={{ color: "red", marginTop: "5px" }}>
+                      {this.props.error.password}
+                    </p>
+                  ) : null}
                 </FormGroup>
                 <FormGroup>
                   <Label for="displayname">Display Name</Label>
@@ -80,6 +90,11 @@ class Register extends Component {
                     placeholder="Display Name"
                     onChange={e => this.onChangeHandler(e)}
                   />
+                  {this.props.error.displayname ? (
+                    <p style={{ color: "red", marginTop: "5px" }}>
+                      {this.props.error.displayname}
+                    </p>
+                  ) : null}
                 </FormGroup>
                 <div className="text-center mt-4">
                   <Button>Register</Button>
@@ -93,7 +108,11 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  error: state.error
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { registerUser }
 )(Register);
