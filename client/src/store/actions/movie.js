@@ -59,6 +59,7 @@ export const getNextMovies = (searchTerm, page) => dispatch => {
 
 // Get Now Playing Movies
 export const getMoviesNow = () => dispatch => {
+  dispatch(setSearched());
   axios
     .get(
       `https://api.themoviedb.org/3/movie/now_playing?${
@@ -74,6 +75,7 @@ export const getMoviesNow = () => dispatch => {
         return;
       }
       dispatch(setMoviesNow(res.data.results));
+      dispatch(setSearchedFalse());
     })
     .catch(err => console.log(err));
 };

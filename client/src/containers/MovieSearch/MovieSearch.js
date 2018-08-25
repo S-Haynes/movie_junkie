@@ -125,7 +125,7 @@ class MovieSearch extends Component {
           </Container>
         </Col>
       );
-    } else {
+    } else if (searched) {
       movieContent = (
         <Col md="8">
           <Container className="pt-4">

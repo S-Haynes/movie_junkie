@@ -20,11 +20,12 @@ class MovieSearchInput extends Component {
     page: 1,
     typingTimeout: null
   };
-
-  componentDidMount() {
+  componentWillMount() {
     this.props.getMoviesNow();
     this.props.getMoviesTop();
     this.props.getMoviesPopular();
+  }
+  componentDidMount() {
     setAuthToken(false);
     window.onscroll = () => {
       if (
