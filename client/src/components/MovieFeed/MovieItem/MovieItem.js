@@ -28,8 +28,6 @@ class MovieItem extends Component {
   render() {
     const {
       movie,
-      height,
-      width,
       minWidth,
       maxWidth,
       minHeight,
