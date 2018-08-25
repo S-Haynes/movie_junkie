@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
+const checkLoginValidation = require("../../validation/login");
+const checkRegisterValidation = require("../../validation/register");
 
 // require models
 const User = require("../../models/user");
@@ -12,10 +14,15 @@ const Profile = require("../../models/profile");
 
 // POST - Register a new user
 router.post("/register", (req, res) => {
-  const errors = {};
   const username = req.body.username;
   const password = req.body.password;
   const displayname = req.body.displayname;
+
+  const { errors, isValid } = checkRegisterValidation(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   User.findOne({ username: username }).then(user => {
     // Check if User Exists
@@ -70,7 +77,14 @@ router.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const errors = {};
+  // const errors = {};
+
+  const { errors, isValid } = checkLoginValidation(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ username: username }).then(user => {
     // Check if user exists
     if (!user) {

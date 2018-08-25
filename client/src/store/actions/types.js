@@ -21,3 +21,5 @@ export const DELETE_WATCHED_ITEM = "DELETE_WATCHED_ITEM";
 
 export const REGISTER_USER = "REGISTER_USER";
 export const SET_CURRENT_USER = "GET_USER";
+
+export const SET_ERRORS = "SET_ERRORS";

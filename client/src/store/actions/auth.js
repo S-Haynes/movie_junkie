@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from "./types";
+import { SET_CURRENT_USER, SET_ERRORS } from "./types";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../../utility/setAuthToken";
@@ -8,7 +8,12 @@ export const registerUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
     .then(res => history.push("/login"))
-    .catch(err => console.log(err.response.data));
+    .catch(err =>
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 // Login a user and return token
@@ -30,7 +35,12 @@ export const loginUser = (userData, history) => dispatch => {
       //send user to their dashboard
       history.push("/dashboard");
     })
-    .catch(err => console.log(err.response.data));
+    .catch(err =>
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 // Logout the user and remove token

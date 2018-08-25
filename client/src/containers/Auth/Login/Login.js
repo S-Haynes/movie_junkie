@@ -68,6 +68,11 @@ class Login extends Component {
                   placeholder="Username"
                   onChange={e => this.onChangeHandler(e)}
                 />
+                {this.props.error.username ? (
+                  <p style={{ color: "red", marginTop: "5px" }}>
+                    {this.props.error.username}
+                  </p>
+                ) : null}
               </FormGroup>
               <FormGroup>
                 <Label for="password">Password</Label>
@@ -79,6 +84,11 @@ class Login extends Component {
                   placeholder="Password"
                   onChange={e => this.onChangeHandler(e)}
                 />
+                {this.props.error.password ? (
+                  <p style={{ color: "red", marginTop: "5px" }}>
+                    {this.props.error.password}
+                  </p>
+                ) : null}
               </FormGroup>
               <div className="text-center mt-4">
                 <Button>Login</Button>
@@ -92,7 +102,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  error: state.error
 });
 
 export default connect(
