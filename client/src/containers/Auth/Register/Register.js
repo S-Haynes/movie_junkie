@@ -10,7 +10,7 @@ import {
   Button
 } from "reactstrap";
 import "./Register.css";
-import { registerUser } from "../../../store/actions/auth";
+import { registerUser, clearErrors } from "../../../store/actions/auth";
 import BackgroundOverlay from "../../../components/UI/BackgroundOverlay/BackgroundOverlay";
 import AuthBg from "../../../assets/img/auth-bg.jpg";
 
@@ -20,6 +20,10 @@ class Register extends Component {
     password: "",
     displayname: ""
   };
+
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -114,5 +118,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, clearErrors }
 )(Register);

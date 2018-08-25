@@ -11,7 +11,7 @@ import {
   Button
 } from "reactstrap";
 import "./Login.css";
-import { loginUser } from "../../../store/actions/auth";
+import { loginUser, clearErrors } from "../../../store/actions/auth";
 import BackgroundOverlay from "../../../components/UI/BackgroundOverlay/BackgroundOverlay";
 import AuthBg from "../../../assets/img/auth-bg.jpg";
 
@@ -20,6 +20,10 @@ class Login extends Component {
     username: "",
     password: ""
   };
+
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -108,5 +112,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginUser, clearErrors }
 )(Login);

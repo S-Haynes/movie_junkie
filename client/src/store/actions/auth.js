@@ -65,3 +65,10 @@ export const setCurrentUser = (userData, auth) => {
     auth: auth
   };
 };
+
+export const clearErrors = () => {
+  return {
+    type: SET_ERRORS,
+    payload: {}
+  };
+};
