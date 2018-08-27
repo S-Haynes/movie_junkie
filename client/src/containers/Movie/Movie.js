@@ -11,6 +11,7 @@ import {
   ListGroupItem,
   Button
 } from "reactstrap";
+import PropTypes from "prop-types";
 import "./Movie.css";
 import Link from "../../../node_modules/react-router-dom/Link";
 import { connect } from "react-redux";
@@ -341,6 +342,16 @@ class Movie extends Component {
     return movieContent;
   }
 }
+
+Movie.propTypes = {
+  movie: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  getMovie: PropTypes.func.isRequired,
+  clearMovie: PropTypes.func.isRequired,
+  addToWatchedList: PropTypes.func.isRequired,
+  addtoBucketList: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   movie: state.movie,

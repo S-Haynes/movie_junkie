@@ -10,6 +10,7 @@ import {
   Jumbotron,
   Button
 } from "reactstrap";
+import PropTypes from "prop-types";
 import "./Login.css";
 import { loginUser, clearErrors } from "../../../store/actions/auth";
 import BackgroundOverlay from "../../../components/UI/BackgroundOverlay/BackgroundOverlay";
@@ -104,6 +105,13 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  error: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

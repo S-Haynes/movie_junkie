@@ -7,6 +7,7 @@ import {
   deleteWatchedItem
 } from "../../store/actions/profile";
 import { Container, Col, Row, Jumbotron } from "reactstrap";
+import PropTypes from "prop-types";
 import BucketListFeed from "../../components/BucketListFeed/BucketListFeed";
 import WatchedListFeed from "../../components/WatchedListFeed/WatchedListFeed";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -113,6 +114,14 @@ class Dashboard extends Component {
     );
   }
 }
+
+Dashboard.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  getProfile: PropTypes.func.isRequired,
+  deleteWatchedItem: PropTypes.func.isRequired,
+  deleteBucketItem: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

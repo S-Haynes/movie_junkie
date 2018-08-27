@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProfileByDisplayName } from "../../store/actions/profile";
 import { Container, Col, Row, CardImg } from "reactstrap";
+import PropTypes from "prop-types";
 import ImageNotFound from "../../assets/img/image-not-found.png";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Slider from "react-slick";
@@ -324,6 +325,11 @@ class Profile extends Component {
     return profileContent;
   }
 }
+
+Profile.propTypes = {
+  profile: PropTypes.object.isRequired,
+  getProfileByDisplayName: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({
   profile: state.profile
 });

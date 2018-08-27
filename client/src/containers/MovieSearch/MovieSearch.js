@@ -6,6 +6,7 @@ import {
   getNextMovies
 } from "../../store/actions/movie";
 import { Container, Row, Col, Jumbotron } from "reactstrap";
+import PropTypes from "prop-types";
 import MovieFeed from "../../components/MovieFeed/MovieFeed";
 import "react-typist/dist/Typist.css";
 import "./MovieSearch.css";
@@ -215,6 +216,13 @@ class MovieSearch extends Component {
     );
   }
 }
+
+MovieSearch.propTypes = {
+  movie: PropTypes.object.isRequired,
+  getMovies: PropTypes.func.isRequired,
+  clearMovieSearch: PropTypes.func.isRequired,
+  getNextMovies: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({
   movie: state.movie
 });

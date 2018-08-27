@@ -11,6 +11,7 @@ import {
   clearMovieSearch,
   setSearchedFalse
 } from "../../store/actions/movie";
+import PropTypes from "prop-types";
 import setAuthToken from "../../utility/setAuthToken";
 import "./MovieSearch.css";
 
@@ -130,6 +131,16 @@ class MovieSearchInput extends Component {
   }
 }
 
+MovieSearchInput.propTypes = {
+  movie: PropTypes.object.isRequired,
+  getMovies: PropTypes.func.isRequired,
+  getNextMovies: PropTypes.func.isRequired,
+  getMoviesNow: PropTypes.func.isRequired,
+  getMoviesTop: PropTypes.func.isRequired,
+  getMoviesPopular: PropTypes.func.isRequired,
+  clearMovieSearch: PropTypes.func.isRequired,
+  setSearchedFalse: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({
   movie: state.movie
 });

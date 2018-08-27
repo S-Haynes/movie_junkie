@@ -10,6 +10,7 @@ import {
   NavLink
 } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 import "./NavigationBar.css";
 import { logoutUser } from "../../store/actions/auth";
 import NavLogo from "../../assets/img/logo-bg2.png";
@@ -106,6 +107,11 @@ class NavigationBar extends Component {
     );
   }
 }
+
+NavigationBar.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

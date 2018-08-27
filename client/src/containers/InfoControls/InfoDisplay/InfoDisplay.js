@@ -1,12 +1,13 @@
 import React from "react";
 import { Container, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import "./InfoDisplay.css";
 import SearchImg from "../../../assets/img/home-search.png";
 import ListImg from "../../../assets/img/home-list.png";
 import ProfilesImg from "../../../assets/img/home-profiles.png";
 
-export default props => {
+const InfoDisplay = props => {
   let infoContent;
   let imgContent;
   if (props.search) {
@@ -14,7 +15,7 @@ export default props => {
       <div className="ml-4">
         <h1>Search.</h1>
         <h6>
-          Search for any movie. You'll get instant results matching your desired
+          Search for any movie. You'll get instanesults matching your desired
           movie, as well as Popular, Top Rated, and Movies in theatres now.
         </h6>
         <Link className="btn btn-lg btn-danger" to="/search">
@@ -83,3 +84,11 @@ export default props => {
     </div>
   );
 };
+
+InfoDisplay.propTypes = {
+  search: PropTypes.bool.isRequired,
+  list: PropTypes.bool.isRequired,
+  signup: PropTypes.bool.isRequired
+};
+
+export default InfoDisplay;

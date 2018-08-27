@@ -9,6 +9,7 @@ import {
   Jumbotron,
   Button
 } from "reactstrap";
+import PropTypes from "prop-types";
 import "./Register.css";
 import { registerUser, clearErrors } from "../../../store/actions/auth";
 import BackgroundOverlay from "../../../components/UI/BackgroundOverlay/BackgroundOverlay";
@@ -111,6 +112,12 @@ class Register extends Component {
     );
   }
 }
+
+Register.propTypes = {
+  error: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   error: state.error
