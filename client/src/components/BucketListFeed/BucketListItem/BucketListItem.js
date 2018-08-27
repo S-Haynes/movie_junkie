@@ -1,8 +1,9 @@
 import React from "react";
 import ImageNotFound from "../../../assets/img/image-not-found.png";
 import "./BucketListItem.css";
+import PropTypes from "prop-types";
 
-const ListItem = props => {
+const BucketListItem = props => {
   const { movie } = props;
 
   const onDeleteHandler = e => {
@@ -44,4 +45,10 @@ const ListItem = props => {
   );
 };
 
-export default ListItem;
+BucketListItem.propTypes = {
+  movie: PropTypes.object.isRequired,
+  key: PropTypes.string.isRequired,
+  delete: PropTypes.func.isRequired
+};
+
+export default BucketListItem;

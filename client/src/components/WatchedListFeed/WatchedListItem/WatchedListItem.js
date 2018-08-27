@@ -1,6 +1,7 @@
 import React from "react";
 import ImageNotFound from "../../../assets/img/image-not-found.png";
 import "./WatchedListItem.css";
+import PropTypes from "prop-types";
 
 const WatchedListItem = props => {
   const { movie } = props;
@@ -41,6 +42,11 @@ const WatchedListItem = props => {
       </div>
     </div>
   );
+};
+
+WatchedListItem.propTypes = {
+  delete: PropTypes.func.isRequired,
+  movie: PropTypes.object.isRequired
 };
 
 export default WatchedListItem;

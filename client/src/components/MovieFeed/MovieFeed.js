@@ -1,6 +1,7 @@
 import React from "react";
 import MovieItem from "./MovieItem/MovieItem";
 import { Row } from "reactstrap";
+import PropTypes from "prop-types";
 
 const MovieFeed = props => {
   const { movies } = props;
@@ -14,4 +15,7 @@ const MovieFeed = props => {
   return <Row>{movieContent}</Row>;
 };
 
+MovieFeed.propTypes = {
+  movies: PropTypes.array.isRequired
+};
 export default MovieFeed;

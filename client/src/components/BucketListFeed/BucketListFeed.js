@@ -1,5 +1,6 @@
 import React from "react";
 import BucketListItem from "./BucketListItem/BucketListItem";
+import PropTypes from "prop-types";
 
 const WatchedListFeed = props => {
   const movieContent = props.movielist.map(movie => (
@@ -8,4 +9,7 @@ const WatchedListFeed = props => {
   return movieContent;
 };
 
+WatchedListFeed.propTypes = {
+  movielist: PropTypes.array.isRequired
+};
 export default WatchedListFeed;

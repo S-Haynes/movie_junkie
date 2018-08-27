@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const BackgroundOverlay = props => {
   return (
@@ -33,6 +34,10 @@ const BackgroundOverlay = props => {
       />
     </div>
   );
+};
+
+BackgroundOverlay.propTypes = {
+  url: PropTypes.string.isRequired
 };
 
 export default BackgroundOverlay;

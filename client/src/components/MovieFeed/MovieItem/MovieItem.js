@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import ImageNotFound from "../../../assets/img/image-not-found.png";
+import PropTypes from "prop-types";
 
 class MovieItem extends Component {
   state = {
@@ -109,5 +110,19 @@ class MovieItem extends Component {
     );
   }
 }
+
+MovieItem.propTypes = {
+  movie: PropTypes.object.isRequired,
+  minWidth: PropTypes.string.isRequired,
+  maxWidth: PropTypes.string.isRequired,
+  minHeight: PropTypes.string.isRequired,
+  maxHeight: PropTypes.string.isRequired,
+  colLg: PropTypes.string.isRequired,
+  colMd: PropTypes.string.isRequired,
+  colSm: PropTypes.string.isRequired,
+  col: PropTypes.string.isRequired,
+  overlayOffset: PropTypes.string.isRequired,
+  titleLength: PropTypes.string.isRequired
+};
 
 export default withRouter(MovieItem);
