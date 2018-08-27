@@ -49,7 +49,7 @@ class InfoControls extends Component {
         color: "#aaa"
       };
 
-      infoDisplay = <InfoDisplay signup />;
+      infoDisplay = <InfoDisplay id="signup" signup />;
     }
 
     if (this.state.search) {
@@ -58,14 +58,14 @@ class InfoControls extends Component {
         color: "#aaa"
       };
 
-      infoDisplay = <InfoDisplay search />;
+      infoDisplay = <InfoDisplay id="search" search />;
     }
     if (this.state.list) {
       listStyles = {
         borderBottom: "8px solid rgb(150, 0, 0)",
         color: "#aaa"
       };
-      infoDisplay = <InfoDisplay list />;
+      infoDisplay = <InfoDisplay id="list" list />;
     }
     return (
       <div>

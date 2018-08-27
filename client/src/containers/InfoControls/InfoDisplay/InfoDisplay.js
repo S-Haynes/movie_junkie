@@ -86,9 +86,9 @@ const InfoDisplay = props => {
 };
 
 InfoDisplay.propTypes = {
-  search: PropTypes.bool.isRequired,
-  list: PropTypes.bool.isRequired,
-  signup: PropTypes.bool.isRequired
+  search: PropTypes.bool,
+  list: PropTypes.bool,
+  signup: PropTypes.bool
 };
 
 export default InfoDisplay;

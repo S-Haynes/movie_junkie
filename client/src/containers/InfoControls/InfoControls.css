@@ -2,3 +2,12 @@ i.fas:active,
 i.fas:hover {
   color: #aaa;
 }
+
+.fade-enter {
+  opacity: 0.3;
+  display: block;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}

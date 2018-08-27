@@ -11,6 +11,8 @@ import { withRouter } from "react-router-dom";
 import ImageNotFound from "../../../assets/img/image-not-found.png";
 import PropTypes from "prop-types";
 
+import "./MovieItem.css";
+
 class MovieItem extends Component {
   state = {
     hovering: false
@@ -113,16 +115,16 @@ class MovieItem extends Component {
 
 MovieItem.propTypes = {
   movie: PropTypes.object.isRequired,
-  minWidth: PropTypes.string.isRequired,
-  maxWidth: PropTypes.string.isRequired,
-  minHeight: PropTypes.string.isRequired,
-  maxHeight: PropTypes.string.isRequired,
-  colLg: PropTypes.string.isRequired,
-  colMd: PropTypes.string.isRequired,
-  colSm: PropTypes.string.isRequired,
-  col: PropTypes.string.isRequired,
-  overlayOffset: PropTypes.string.isRequired,
-  titleLength: PropTypes.string.isRequired
+  minWidth: PropTypes.string,
+  maxWidth: PropTypes.string,
+  minHeight: PropTypes.string,
+  maxHeight: PropTypes.string,
+  colLg: PropTypes.string,
+  colMd: PropTypes.string,
+  colSm: PropTypes.string,
+  col: PropTypes.string,
+  overlayOffset: PropTypes.string,
+  titleLength: PropTypes.number
 };
 
 export default withRouter(MovieItem);

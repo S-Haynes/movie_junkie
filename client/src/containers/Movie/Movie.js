@@ -349,8 +349,8 @@ Movie.propTypes = {
   auth: PropTypes.object.isRequired,
   getMovie: PropTypes.func.isRequired,
   clearMovie: PropTypes.func.isRequired,
-  addToWatchedList: PropTypes.func.isRequired,
-  addtoBucketList: PropTypes.func.isRequired
+  addToWatchedList: PropTypes.func,
+  addtoBucketList: PropTypes.func
 };
 
 const mapStateToProps = state => ({
