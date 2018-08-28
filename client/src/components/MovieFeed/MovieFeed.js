@@ -9,27 +9,13 @@ import "./Moviefeed.css";
 const MovieFeed = props => {
   const { movies } = props;
   const movieContent = movies.map(movie => (
-    <CSSTransition
-      key={movie.id}
-      timeout={500}
-      classNames="fade"
-      mountOnEnter
-      unmountOnExit
-    >
-      <MovieItem
-        key={movie.id + Math.random() * 10000}
-        movie={movie}
-        {...props}
-      />
-    </CSSTransition>
+    <MovieItem
+      key={movie.id + Math.random() * 10000}
+      movie={movie}
+      {...props}
+    />
   ));
-  return (
-    <Row>
-      <TransitionGroup exit={false} component={null}>
-        {movieContent}
-      </TransitionGroup>
-    </Row>
-  );
+  return <Row>{movieContent}</Row>;
 };
 
 MovieFeed.propTypes = {

@@ -39,12 +39,12 @@
 }
 
 .fade-enter {
-  opacity: 0;
+  opacity: 0.01;
 }
 
 .fade-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 
 .fade-exit {
@@ -53,7 +53,7 @@
 
 .fade-exit-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 
 .fadenow-enter {
@@ -62,7 +62,7 @@
 
 .fadenow-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 
 .fadenow-exit {

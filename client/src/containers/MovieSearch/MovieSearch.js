@@ -68,7 +68,7 @@ class MovieSearch extends Component {
 
     if (movies && movies.length > 0 && searched) {
       movieContent = (
-        <CSSTransition key="moviesearch" classNames="fade" timeout={500}>
+        <CSSTransition key="moviesearch" classNames="fade" timeout={300}>
           <div>
             <Container>
               <p>Scroll down for additional movies results.</p>
