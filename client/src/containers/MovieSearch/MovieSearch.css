@@ -37,3 +37,55 @@
     opacity: 1;
   }
 }
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fadenow-enter {
+  opacity: 0;
+}
+
+.fadenow-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fadenow-exit {
+  opacity: 0;
+}
+
+.fadenow-exit-active {
+  opacity: 0;
+}
+
+.fade-spinner-enter {
+  opacity: 1;
+}
+
+.fade-spinner-enter-active {
+  opacity: 0;
+  transition: opacity 0ms;
+}
+
+.fade-spinner-exit {
+  opacity: 0;
+}
+
+.fade-spinner-exit-active {
+  opacity: 0;
+}

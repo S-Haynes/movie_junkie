@@ -13,6 +13,8 @@ import "./MovieSearch.css";
 import setAuthToken from "../../utility/setAuthToken";
 import MovieSearchInput from "./MovieSearchInput";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import TransitionGroup from "react-transition-group/TransitionGroup";
+import CSSTransition from "react-transition-group/CSSTransition";
 
 class MovieSearch extends Component {
   state = {
@@ -66,73 +68,77 @@ class MovieSearch extends Component {
 
     if (movies && movies.length > 0 && searched) {
       movieContent = (
-        <Col md="8">
-          <Container>
-            <p>Scroll down for additional movies results.</p>
-          </Container>
+        <CSSTransition key="moviesearch" classNames="fade" timeout={500}>
+          <div>
+            <Container>
+              <p>Scroll down for additional movies results.</p>
+            </Container>
 
-          <MovieFeed
-            titleLength={20}
-            overlayOffset="-100px"
-            colLg="3"
-            colMd="4"
-            colSm="4"
-            col="12"
-            minHeight="250px"
-            maxHeight="250px"
-            minWidth="150px"
-            maxWidth="300px"
-            movies={movies}
-          />
-        </Col>
+            <MovieFeed
+              titleLength={20}
+              overlayOffset="-100px"
+              colLg="3"
+              colMd="4"
+              colSm="4"
+              col="12"
+              minHeight="250px"
+              maxHeight="250px"
+              minWidth="150px"
+              maxWidth="300px"
+              movies={movies}
+            />
+          </div>
+        </CSSTransition>
       );
     } else if (movies.length === 0 && !searched && moviesNow.length > 0) {
       movieContent = (
-        <Col style={{ maxWidth: "800px" }} md="8">
-          <Container>
-            <p>
-              In theatres{" "}
-              <span
-                className="blink"
-                style={{
-                  color: "red"
-                }}
-              >
-                <em>NOW</em>
-              </span>
-            </p>
-          </Container>
+        <CSSTransition key="moviesnow" classNames="fadenow" timeout={300}>
+          <div>
+            <Container>
+              <p>
+                In theatres{" "}
+                <span
+                  className="blink"
+                  style={{
+                    color: "red"
+                  }}
+                >
+                  <em>NOW</em>
+                </span>
+              </p>
+            </Container>
 
-          <MovieFeed
-            titleLength={30}
-            overlayOffset="-100px"
-            colLg="3"
-            colMd="4"
-            colSm="4"
-            col="12"
-            minHeight="250px"
-            maxHeight="250px"
-            minWidth="150px"
-            maxWidth="280px"
-            movies={moviesNow.slice(randomNumNow, 16 + randomNumNow)}
-          />
-        </Col>
+            <MovieFeed
+              titleLength={30}
+              overlayOffset="-100px"
+              colLg="3"
+              colMd="4"
+              colSm="4"
+              col="12"
+              minHeight="250px"
+              maxHeight="250px"
+              minWidth="150px"
+              maxWidth="280px"
+              movies={moviesNow.slice(randomNumNow, 16 + randomNumNow)}
+            />
+          </div>
+        </CSSTransition>
       );
-    } else if (movies && movies.length === 0 && searched) {
+    } else if (movies.length === 0 && searched) {
       movieContent = (
-        <Col md="8">
+        <CSSTransition key="spinner" timeout={0} classNames="fade-spinner">
           <Container className="pt-4">
             <Spinner />
           </Container>
-        </Col>
+        </CSSTransition>
       );
     } else if (searched) {
       movieContent = (
-        <Col md="8">
+        <CSSTransition key="nomovies" timeout={0} classNames="fade-spinner">
           <Container className="pt-4">
             <h1>No Movies found by that name, keep searching...</h1>
           </Container>
-        </Col>
+        </CSSTransition>
       );
     }
 
@@ -145,7 +151,11 @@ class MovieSearch extends Component {
           <MovieSearchInput />
           <div className="movie-content-body">
             <Row>
-              {movieContent}
+              <Col md="8" style={{ maxWidth: "800px" }}>
+                <TransitionGroup component={null} exit={false}>
+                  {movieContent}
+                </TransitionGroup>
+              </Col>
               <Col md="4">
                 <Row>
                   <Col xs="12">
