@@ -71,7 +71,7 @@ class MovieSearch extends Component {
         <CSSTransition key="moviesearch" classNames="fade" timeout={300}>
           <div>
             <Container>
-              <p>Scroll down for additional movies results.</p>
+              <p>Scroll down for additional movie results.</p>
             </Container>
 
             <MovieFeed

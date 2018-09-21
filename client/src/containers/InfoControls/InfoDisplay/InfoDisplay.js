@@ -15,7 +15,7 @@ const InfoDisplay = props => {
       <div className="ml-4">
         <h1>Search.</h1>
         <h6>
-          Search for any movie. You'll get instanesults matching your desired
+          Search for any movie. You'll get instant results matching your desired
           movie, as well as Popular, Top Rated, and Movies in theatres now.
         </h6>
         <Link className="btn btn-lg btn-danger" to="/search">
