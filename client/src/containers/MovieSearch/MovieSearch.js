@@ -181,6 +181,7 @@ class MovieSearch extends Component {
                         col="6"
                         width="150px"
                         height="150px"
+                        maxHeight="150px"
                         minwidth="60px"
                         movies={moviesTop.slice(randomNumTop, 6 + randomNumTop)}
                       />
@@ -209,6 +210,7 @@ class MovieSearch extends Component {
                         col="6"
                         width="150px"
                         height="150px"
+                        maxHeight="150px"
                         minwidth="60px"
                         movies={moviesPopular.slice(
                           randomNumTop,
