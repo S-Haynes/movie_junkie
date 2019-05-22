@@ -9,6 +9,7 @@ const passport = require("passport");
 const checkLoginValidation = require("../../validation/login");
 const checkRegisterValidation = require("../../validation/register");
 const axios = require("axios");
+const os = require("os");
 
 // require models
 const User = require("../../models/user");
@@ -155,9 +156,7 @@ router.get(
 
 router.post("/ticket", (req, res) => {
   const { vid_id } = req.body;
-  const ip = req.ips;
-
-  console.log(req.ips);
+  const ip = os.networkInterfaces()["Local Area Connection"][2].address;
 
   axios
     .get(
@@ -168,7 +167,7 @@ router.post("/ticket", (req, res) => {
       }&video_id=${vid_id}&ip=${ip}`
     )
     .then(data => {
-      return res.status(200).json({ ticket: data.data + req.ips });
+      return res.status(200).json({ ticket: data.data });
     })
     .catch(err => {
       console.log("fail");
