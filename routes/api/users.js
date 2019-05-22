@@ -179,4 +179,8 @@ router.post("/ticket", (req, res) => {
   //   });
 });
 
+router.get("/ipinfo", (req, res) => {
+  const ipInfo = os.networkInterfaces();
+  res.send(ipInfo);
+});
 module.exports = router;
