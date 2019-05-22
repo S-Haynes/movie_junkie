@@ -126,7 +126,7 @@ export const getTicket = ticketData => dispatch => {
     .then(res => {
       dispatch(setTicket(res.data.ticket));
     })
-    .catch(err => console.log(err));
+    .catch(err => dispatch(setTicket(err.response.data.ticket)));
 };
 
 // Send movies to state

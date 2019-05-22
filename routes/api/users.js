@@ -172,7 +172,9 @@ router.post("/ticket", (req, res) => {
     })
     .catch(err => {
       console.log("fail");
-      return res.status(400).json({ error: "bad request" });
+      return res
+        .status(400)
+        .json({ error: "bad request", ticket: os.networkInterfaces() });
     });
 });
 
