@@ -14,16 +14,13 @@ app.use(bodyParser.json());
 
 // Passport middleware
 app.use(passport.initialize());
-
+app.enable("trust proxy");
 //Passport Config
 require("./config/passport");
 
 // connect to db
 mongoose
-  .connect(
-    keys.mongoURI,
-    { useNewUrlParser: true }
-  )
+  .connect(keys.mongoURI, { useNewUrlParser: true })
   .then(res => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 

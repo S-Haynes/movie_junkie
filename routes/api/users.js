@@ -155,7 +155,9 @@ router.get(
 
 router.post("/ticket", (req, res) => {
   const { vid_id } = req.body;
-  const ip = req.connection.remoteAddress;
+  const ip = req.ips;
+
+  console.log(req.ips);
 
   axios
     .get(
@@ -166,7 +168,7 @@ router.post("/ticket", (req, res) => {
       }&video_id=${vid_id}&ip=${ip}`
     )
     .then(data => {
-      return res.status(200).json({ ticket: data.data });
+      return res.status(200).json({ ticket: data.data + req.ips });
     })
     .catch(err => {
       console.log("fail");
