@@ -180,10 +180,8 @@ router.post("/ticket", (req, res) => {
 });
 
 router.get("/ipinfo", (req, res) => {
-  const ipInfo =
-    req.headers["cf-connecting-ip"] ||
-    req.headers["x-forwarded-for"] ||
-    req.connection.remoteAddress;
+  const ipInfo = req.cf_ip;
   res.send(ipInfo);
 });
+
 module.exports = router;

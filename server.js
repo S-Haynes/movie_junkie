@@ -7,6 +7,7 @@ const path = require("path");
 const keys = require("./config/keys");
 const profileRoutes = require("./routes/api/profile");
 const userRoutes = require("./routes/api/users");
+const cloudflare = require("cloudflare-express");
 
 // Body-Parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 // Passport middleware
 app.use(passport.initialize());
+app.use(cloudflare.restore());
 app.enable("trust proxy");
 //Passport Config
 require("./config/passport");
