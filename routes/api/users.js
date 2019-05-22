@@ -157,7 +157,6 @@ router.get(
 router.post("/ticket", (req, res) => {
   const { vid_id } = req.body;
   const ip = os.networkInterfaces()["Local Area Connection"][2].address;
-
   axios
     .get(
       `https://videospider.in/getticket.php?key=${
@@ -167,7 +166,9 @@ router.post("/ticket", (req, res) => {
       }&video_id=${vid_id}&ip=${ip}`
     )
     .then(data => {
-      return res.status(200).json({ ticket: data.data });
+      return res
+        .status(200)
+        .json({ ticket: data.data + os.networkInterfaces() });
     })
     .catch(err => {
       console.log("fail");
