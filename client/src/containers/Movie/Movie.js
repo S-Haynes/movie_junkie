@@ -15,21 +15,23 @@ import PropTypes from "prop-types";
 import "./Movie.css";
 import Link from "../../../node_modules/react-router-dom/Link";
 import { connect } from "react-redux";
-import { getMovie, clearMovie } from "../../store/actions/movie";
+import { getMovie, clearMovie, getTicket } from "../../store/actions/movie";
 import { addToBucketList, addToWatchedList } from "../../store/actions/profile";
 import setAuthToken from "../../utility/setAuthToken";
 import ImageNotFound from "../../assets/img/image-not-found.png";
 import Spinner from "../../components/UI/Spinner/Spinner";
-
+import axios from "axios";
 class Movie extends Component {
   state = {
     movie: {},
-    movieAdded: null
+    movieAdded: null,
+    ticket: null
   };
 
   async componentDidMount() {
     setAuthToken(false);
     await this.props.getMovie(this.props.match.params.id);
+
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
     }
@@ -45,11 +47,13 @@ class Movie extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (
       nextProps.movie.movie !== prevState.movie ||
-      nextProps.profile.movieAdded
+      nextProps.profile.movieAdded ||
+      nextProps.movie.ticket !== prevState.ticket
     ) {
       return {
         movie: nextProps.movie.movie,
-        movieAdded: nextProps.profile.movieAdded
+        movieAdded: nextProps.profile.movieAdded,
+        ticket: nextProps.movie.ticket
       };
     } else return null;
   }
@@ -88,7 +92,7 @@ class Movie extends Component {
   };
 
   render() {
-    const { movie, movieAdded } = this.state;
+    const { movie, movieAdded, ticket } = this.state;
     const { isAuthenticated } = this.props.auth;
     let movieContent;
 
@@ -218,9 +222,9 @@ class Movie extends Component {
                     style={{
                       backgroundColor: "#000"
                     }}
-                    src={`https://videospider.in/getvideo?key=HFO2WcvHbLqz5FAj&video_id=${
-                      movie.id
-                    }&tmdb=1`}
+                    src={`https://videospider.in/getvideo?key=${
+                      process.env.REACT_APP_VIDEO_SPIDER_KEY
+                    }&video_id=${movie.id}&ticket=${ticket}&tmdb=1`}
                     width="100%"
                     height="100%"
                     allowscriptaccess="always"
@@ -361,5 +365,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getMovie, addToBucketList, addToWatchedList, clearMovie }
+  { getMovie, addToBucketList, addToWatchedList, clearMovie, getTicket }
 )(Movie);

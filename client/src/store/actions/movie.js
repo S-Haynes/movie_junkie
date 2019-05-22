@@ -9,7 +9,8 @@ import {
   SET_MOVIES_POPULAR,
   SET_MOVIES_TOP,
   SET_SEARCHED,
-  SET_SEARCHED_FALSE
+  SET_SEARCHED_FALSE,
+  SET_TICKET
 } from "./types";
 import axios from "axios";
 
@@ -119,11 +120,27 @@ export const getMoviesPopular = () => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const getTicket = ticketData => dispatch => {
+  axios
+    .post("/api/users/ticket", ticketData)
+    .then(res => {
+      dispatch(setTicket(res.data.ticket));
+    })
+    .catch(err => console.log(err));
+};
+
 // Send movies to state
 export const setMovies = movies => {
   return {
     type: GET_MOVIES,
     payload: movies
+  };
+};
+
+export const setTicket = ticket => {
+  return {
+    type: SET_TICKET,
+    payload: ticket
   };
 };
 
@@ -168,6 +185,7 @@ export const getMovie = id => dispatch => {
     )
     .then(res => {
       dispatch(setMovie(res.data));
+      dispatch(getTicket({ vid_id: res.data.imdb_id }));
     })
     .catch(err => console.log(err));
 };

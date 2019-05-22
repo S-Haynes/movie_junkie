@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
@@ -7,6 +8,7 @@ const keys = require("../../config/keys");
 const passport = require("passport");
 const checkLoginValidation = require("../../validation/login");
 const checkRegisterValidation = require("../../validation/register");
+const axios = require("axios");
 
 // require models
 const User = require("../../models/user");
@@ -150,4 +152,26 @@ router.get(
       });
   }
 );
+
+router.post("/ticket", (req, res) => {
+  const { vid_id } = req.body;
+  const ip = 10000000 * Math.random();
+
+  axios
+    .get(
+      `https://videospider.in/getticket.php?key=${
+        process.env.REACT_APP_VIDEO_SPIDER_KEY
+      }&secret_key=${
+        process.env.REACT_APP_VIDEO_SPIDER_SECRET_KEY
+      }&video_id=${vid_id}&ip=${ip}`
+    )
+    .then(data => {
+      return res.status(200).json({ ticket: data.data });
+    })
+    .catch(err => {
+      console.log("fail");
+      return res.status(400).json({ error: "bad request" });
+    });
+});
+
 module.exports = router;
