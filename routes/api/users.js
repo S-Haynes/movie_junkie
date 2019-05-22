@@ -155,7 +155,7 @@ router.get(
 
 router.post("/ticket", (req, res) => {
   const { vid_id } = req.body;
-  const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  const ip = req.connection.remoteAddress;
 
   axios
     .get(
