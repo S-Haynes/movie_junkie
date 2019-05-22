@@ -222,9 +222,9 @@ class Movie extends Component {
                     style={{
                       backgroundColor: "#000"
                     }}
-                    src={`https://videospider.in/getvideo?key=${
-                      process.env.REACT_APP_VIDEO_SPIDER_KEY
-                    }&video_id=${movie.id}&ticket=${ticket}&tmdb=1`}
+                    src={`https://videospider.in/getvideo?key=HFO2WcvHbLqz5FAj&video_id=${
+                      movie.id
+                    }&ticket=${ticket}&tmdb=1`}
                     width="100%"
                     height="100%"
                     allowscriptaccess="always"
