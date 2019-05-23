@@ -157,6 +157,7 @@ router.get(
 router.post("/ticket", (req, res) => {
   const { vid_id } = req.body;
   const ip = req.cf_ip;
+
   axios
     .get(
       `https://videospider.in/getticket.php?key=${
@@ -175,7 +176,7 @@ router.post("/ticket", (req, res) => {
 
 router.get("/ipinfo", (req, res) => {
   const ipInfo = req.cf_ip;
-  res.send(ipInfo);
+  res.send(req.socket.address().address);
 });
 
 module.exports = router;
