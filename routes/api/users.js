@@ -154,29 +154,4 @@ router.get(
   }
 );
 
-router.post("/ticket", (req, res) => {
-  const { vid_id } = req.body;
-  const ip = req.cf_ip;
-
-  axios
-    .get(
-      `https://videospider.in/getticket.php?key=${
-        process.env.REACT_APP_VIDEO_SPIDER_KEY
-      }&secret_key=${
-        process.env.REACT_APP_VIDEO_SPIDER_SECRET_KEY
-      }&video_id=${vid_id}&ip=${ip}`
-    )
-    .then(data => {
-      return res.status(200).json({ ticket: data.data });
-    })
-    .catch(err => {
-      return res.status(400).json({ error: "bad request" });
-    });
-});
-
-router.get("/ipinfo", (req, res) => {
-  const ipInfo = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-  res.send(ipInfo + "hello");
-});
-
 module.exports = router;

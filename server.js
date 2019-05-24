@@ -7,7 +7,6 @@ const path = require("path");
 const keys = require("./config/keys");
 const profileRoutes = require("./routes/api/profile");
 const userRoutes = require("./routes/api/users");
-const cloudflare = require("cloudflare-express");
 
 // Body-Parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,8 +14,6 @@ app.use(bodyParser.json());
 
 // Passport middleware
 app.use(passport.initialize());
-app.use(cloudflare.restore());
-app.enable("trust proxy");
 //Passport Config
 require("./config/passport");
 
@@ -42,6 +39,6 @@ if (process.env.NODE_ENV === "production") {
 }
 // define port
 const port = process.env.PORT || 5000;
-app.listen(port, "::", () => {
+app.listen(port, () => {
   console.log("Server started on port " + port);
 });

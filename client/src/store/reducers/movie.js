@@ -8,8 +8,7 @@ import {
   SET_MOVIES_POPULAR,
   SET_MOVIES_TOP,
   SET_SEARCHED,
-  SET_SEARCHED_FALSE,
-  SET_TICKET
+  SET_SEARCHED_FALSE
 } from "../actions/types";
 
 const initialState = {
@@ -18,8 +17,7 @@ const initialState = {
   moviesPopular: [],
   movies: [],
   searched: false,
-  movie: {},
-  ticket: null
+  movie: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -75,11 +73,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searched: false
-      };
-    case SET_TICKET:
-      return {
-        ...state,
-        ticket: action.payload
       };
     default:
       return state;
