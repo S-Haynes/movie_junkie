@@ -175,8 +175,8 @@ router.post("/ticket", (req, res) => {
 });
 
 router.get("/ipinfo", (req, res) => {
-  const ipInfo = req.cf_ip;
-  res.send(req.socket.address().address);
+  const ipInfo = req.headers["x-forwarded-for"];
+  res.send(ipInfo + "hello");
 });
 
 module.exports = router;
