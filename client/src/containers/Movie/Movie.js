@@ -220,7 +220,9 @@ class Movie extends Component {
                     style={{
                       backgroundColor: "#000"
                     }}
-                    src={`http://vplus.ucoz.com/${movie.imdb_id}`}
+                    src={`https://api.odb.to/embed?imdb_id=${
+                      movie.imdb_id
+                    }&api_key=${process.env.REACT_APP_ODB_KEY}`}
                     width="100%"
                     height="100%"
                     allowscriptaccess="always"
