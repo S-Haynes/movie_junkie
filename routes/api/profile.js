@@ -23,6 +23,7 @@ router.get(
 
 // GET - all profiles
 router.get("/all", (req, res) => {
+  console.log('yes');
   Profile.find()
     .populate("user", ["displayname", "username"])
     .then(profiles => res.status(200).json(profiles))
@@ -223,4 +224,9 @@ router.delete(
       });
   }
 );
+
+router.get('/ip', (req, res) => {
+  res.status(200).json({ip: req.ip})
+});
+
 module.exports = router;

@@ -7,6 +7,8 @@ const path = require("path");
 const keys = require("./config/keys");
 const profileRoutes = require("./routes/api/profile");
 const userRoutes = require("./routes/api/users");
+var mod_cloudflare = require('mod_cloudflare');
+ 
 
 // Body-Parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +29,8 @@ mongoose
 
 app.use("/api/profile", profileRoutes);
 app.use("/api/users", userRoutes);
+
+app.use(mod_cloudflare());
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
