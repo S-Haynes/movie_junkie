@@ -21,7 +21,7 @@
     "body-parser": "^1.18.3",
     "concurrently": "^5.0.2",
     "dotenv": "^6.2.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.3.0",
     "mod_cloudflare": "^1.0.4",
     "mongoose": "^5.2.8",
